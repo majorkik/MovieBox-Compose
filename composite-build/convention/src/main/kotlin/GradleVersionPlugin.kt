@@ -18,7 +18,7 @@ class GradleVersionPlugin : Plugin<Project> {
     private fun isNonStable(version: String): Boolean {
         val regex = "^[0-9,.v-]+(-r)?$".toRegex()
         val stableKeyword = listOf("RELEASE", "FINAL", "GA").any {
-            version.toUpperCase(Locale.getDefault()).contains(it)
+            version.uppercase(Locale.getDefault()).contains(it)
         }
 
         val isStable = stableKeyword or regex.matches(version)

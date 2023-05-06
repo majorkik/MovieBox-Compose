@@ -1,20 +1,21 @@
 [versions]
 # Kotlin
-kotlin = "1.8.0"
-coroutines = "1.6.3"
-ksp = "1.8.0-1.0.8"
+kotlin = "1.8.21"
+coroutines = "1.6.4"
+ksp = "1.8.21-1.0.11"
 # Dependency Injection
 koin = "3.3.2"
 koin_androidx_compose = "3.4.1"
 # Testing
 kotest = "5.3.0"
 # Gradle
+android_gradle_plugin = "8.2.0-alpha02"
 android_gradle = "7.4.0"
 # Compose
-androidx_compose_bom = "2023.01.00"
-androidx_compose_material3 = "1.1.0-alpha06"
-compose_compiler = "1.4.0"
-androidx_compose_runtime_tracing = "1.0.0-alpha01"
+androidx_compose_bom = "2023.05.00"
+androidx_compose_material3 = "1.1.0-rc01"
+compose_compiler = "1.4.7"
+androidx_compose_runtime_tracing = "1.0.0-alpha03"
 accompanist = "0.28.0"
 compose_destinations = "1.8.32-beta"
 # Gradle Version plugin
@@ -31,9 +32,8 @@ slf4j = "2.0.6"
 
 [libraries]
 # Gradle
-gradle_build = { module = "com.android.tools.build:gradle", version.ref = "android_gradle" }
-kotlin_gradle_plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-# Kotlin
+gradle_build = { module = "com.android.tools.build:gradle", version.ref = "android_gradle_plugin" }
+# Kotlin & Coroutines
 kotlin_stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin_ext = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin_reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
@@ -43,12 +43,12 @@ coroutines_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines_android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 # AndroidX
-androidx_activity_compose = "androidx.activity:activity-compose:1.6.1"
-androidx_core_ktx = "androidx.core:core-ktx:1.9.0"
-androidx_appcompat = "androidx.appcompat:appcompat:1.6.0"
-androidx_material = "com.google.android.material:material:1.7.0"
-androidx_lifecycle_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-androidx_navigation_compose = "androidx.navigation:navigation-compose:2.5.0-alpha02"
+androidx_activity_compose = "androidx.activity:activity-compose:1.7.1"
+androidx_core_ktx = "androidx.core:core-ktx:1.10.0"
+androidx_appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx_material = "com.google.android.material:material:1.9.0"
+androidx_lifecycle_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+androidx_navigation_compose = "androidx.navigation:navigation-compose:2.6.0-beta01"
 androidx_datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
 # Compose
 compose_compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose_compiler" }
@@ -109,6 +109,11 @@ compose_destinations_ksp = { module = "io.github.raamcosta.compose-destinations:
 eithernet = "com.slack.eithernet:eithernet:1.2.1"
 expandabletext = "io.github.dokar3:expandabletext:0.1.7"
 
+# Compile-only plugins for composite build
+android_gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android_gradle_plugin" }
+kotlin_gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp_gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
 [bundles]
 androidx_ui = [
     "androidx_activity_compose",
@@ -136,10 +141,11 @@ kotest = ["kotest_assertions", "kotest_junit"]
 logging = ["slf4j", "kotlin_logging"]
 
 [plugins]
-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+android_application = { id = "com.android.application", version.ref = "android_gradle_plugin" }
+kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin_serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint_jlleitschuh" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 gradle_versions = { id = "com.github.ben-manes.versions", version.ref = "gradle_versions" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

@@ -12,11 +12,21 @@ android {
         versionName = "0.0.1"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     namespace = "com.majorkik.movieboxcompose"
 
     applicationVariants.all {
         kotlin.sourceSets {
             getByName(name) { kotlin.srcDir("build/generated/ksp/$name/kotlin") }
+        }
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(11))
         }
     }
 }

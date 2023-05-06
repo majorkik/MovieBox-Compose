@@ -59,9 +59,9 @@ java {
 }
 
 dependencies {
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.gradle.build)
-    implementation(libs.kotlin.stdlib)
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 
     implementation(libs.detekt.plugin)
     implementation(libs.spotless.plugin)

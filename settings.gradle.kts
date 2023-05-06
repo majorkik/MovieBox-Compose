@@ -8,13 +8,26 @@ pluginManagement {
     }
 }
 
+plugins {
+    id("org.gradle.toolchains.foojay-resolver") version "0.4.0"
+}
+
+toolchainManagement {
+    jvm {
+        javaRepositories {
+            repository("foojay") {
+                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+            }
+        }
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal()
     }
 }
 
@@ -23,7 +36,7 @@ rootProject.name = "moviebox-compose"
 // Main module
 include(":app")
 // Core modules
-include(":core:ui", ":core:common")
+include(":core:ui", ":core:common", ":core:localizaton")
 // UI
 include(
     ":ui:nav-home",
@@ -39,4 +52,3 @@ include(
     ":feature:app-preferences:api",
     ":feature:app-preferences:impl",
 )
-include(":core:localizaton")

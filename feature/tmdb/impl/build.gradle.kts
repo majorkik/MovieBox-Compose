@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    kotlin("plugin.serialization") version "1.8.0"
+    id("kotlinx-serialization")
     id("moviebox.code.quality")
 }
 

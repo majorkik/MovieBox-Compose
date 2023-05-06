@@ -7,7 +7,7 @@ import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
         compileSdk = 33
@@ -35,12 +35,12 @@ fun Project.configureKotlinAndroid(
                 "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
             )
 
-            // Set JVM target to 1.8
+            // Set JVM target to 11
             jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 }
 
-fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
