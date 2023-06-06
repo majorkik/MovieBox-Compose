@@ -23,12 +23,6 @@ android {
             getByName(name) { kotlin.srcDir("build/generated/ksp/$name/kotlin") }
         }
     }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(11))
-        }
-    }
 }
 
 dependencies {

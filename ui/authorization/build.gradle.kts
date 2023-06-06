@@ -1,3 +1,5 @@
+
+
 plugins {
     id("moviebox.library.compose")
     id("moviebox.code.quality")
@@ -10,12 +12,6 @@ android {
     libraryVariants.all {
         kotlin.sourceSets {
             getByName(name) { kotlin.srcDir("build/generated/ksp/$name/kotlin") }
-        }
-    }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(11))
         }
     }
 

@@ -13,12 +13,6 @@ android {
         }
     }
 
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(11))
-        }
-    }
-
     ksp {
         arg("compose-destinations.moduleName", "home")
         arg("compose-destinations.mode", "destinations")
