@@ -7,6 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.majorkik.core.ui.theme.MBTheme
@@ -20,14 +21,14 @@ import com.majorkik.movieboxcompose.navigation.defaultPopExitTransition
 import com.majorkik.movieboxcompose.navigation.navGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
+import com.ramcosta.composedestinations.navigation.DependenciesContainerBuilder
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.scope.DestinationScope
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine as rememberAnimatedNavHostEngine1
 
 @OptIn(
     ExperimentalAnimationApi::class,
-    ExperimentalMaterialNavigationApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterialNavigationApi::class
 )
 @Composable
 fun MainContainer() {
@@ -51,12 +52,14 @@ fun MainContainer() {
             navGraph = NavGraphs.root,
             modifier = Modifier
                 .padding(bottom = innerPadding.calculateBottomPadding()),
-            dependenciesContainerBuilder = { dependency(currentNavigator()) }
+            dependenciesContainerBuilder = {
+                dependency(currentNavigator())
+            }
         )
     }
 }
 
-fun DestinationScope<*>.currentNavigator(): CommonNavigator {
+fun DependenciesContainerBuilder<*>.currentNavigator(): CommonNavigator {
     return CommonNavigator(
         navBackStackEntry.destination.navGraph(),
         navController

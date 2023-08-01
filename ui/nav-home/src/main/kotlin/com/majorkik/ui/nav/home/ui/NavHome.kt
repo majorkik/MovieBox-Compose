@@ -46,11 +46,11 @@ import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.extension.showToast
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.Genre
+import com.majorkik.ui.nav.home.component.AppBar
 import com.majorkik.ui.nav.home.component.GenresSwitch
 import com.majorkik.ui.nav.home.component.HorizontalMovieCard
 import com.majorkik.ui.nav.home.component.RoundedButton
 import com.majorkik.ui.nav.home.component.TitleText
-import com.majorkik.ui.nav.home.component.AppBar
 import com.majorkik.ui.nav.home.component.VerticalMovieCard
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.flow.collectLatest
@@ -245,7 +245,7 @@ fun GenresBlock(
     genres: List<Genre>,
     isMovieGenresSelected: Boolean,
     onToggle: () -> Unit,
-    onGenreClick: (Genre) -> Unit
+    onGenreClick: (Genre) -> Unit,
 ) {
     Column {
         Row(
@@ -318,7 +318,7 @@ internal fun <T> InfinityCollection(
     @StringRes title: Int,
     items: List<T>,
     onLoadMore: () -> Unit,
-    content: @Composable LazyItemScope.(T) -> Unit
+    content: @Composable LazyItemScope.(T) -> Unit,
 ) {
     val listState = rememberLazyListState()
 

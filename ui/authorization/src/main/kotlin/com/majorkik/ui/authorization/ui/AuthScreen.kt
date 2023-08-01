@@ -66,7 +66,6 @@ fun AuthScreen(navigator: AuthNavigator) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AuthContent(
     state: AuthViewState,
