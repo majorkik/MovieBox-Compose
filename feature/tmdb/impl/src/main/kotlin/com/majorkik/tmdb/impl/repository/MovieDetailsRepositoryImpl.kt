@@ -13,13 +13,9 @@ import com.slack.eithernet.ApiResult
 
 internal class MovieDetailsRepositoryImpl(private val api: ApiService) : MovieDetailsRepository {
     override suspend fun getMovieDetailsById(id: Int): Either<MovieDetailsError, MovieDetails> {
-        return when (
-            val response =
-                api.getMovieById(id = id, appendToResponse = "images,credits")
-        ) {
+        return when (val response = api.getMovieById(id = id, appendToResponse = "images,credits")) {
             is ApiResult.Success -> response.value.toDomainModel().right()
             is ApiResult.Failure -> {
-                // Print logs
                 response.printLog()
 
                 when (response) {

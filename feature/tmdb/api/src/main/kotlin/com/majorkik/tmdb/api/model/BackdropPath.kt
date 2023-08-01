@@ -4,7 +4,6 @@ import com.majorkik.tmdb.api.UrlConstants
 
 @JvmInline
 value class BackdropPath(val value: String) {
-    @Suppress("unused")
     enum class Size(val path: String) {
         Width300("w300"),
         Width780("w780"),
@@ -18,3 +17,12 @@ value class BackdropPath(val value: String) {
 }
 
 fun String.toBackdropPath() = BackdropPath(value = this)
+
+val BackdropPath.small
+    get() = build(BackdropPath.Size.Width300)
+val BackdropPath.medium
+    get() = build(BackdropPath.Size.Width780)
+val BackdropPath.large
+    get() = build(BackdropPath.Size.Width1280)
+val BackdropPath.original
+    get() = build(BackdropPath.Size.Original)
