@@ -1,8 +1,5 @@
 package com.majorkik.ui.details.ui
 
-import androidx.annotation.StringRes
-import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,29 +9,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.movieDetailsPreview
 import com.majorkik.ui.details.ui.compose.MovieCreditsBlock
+import com.majorkik.ui.details.ui.compose.MovieDescription
 import com.majorkik.ui.details.ui.compose.MovieDetailsBlock
 import com.majorkik.ui.details.ui.compose.MovieHeader
 import com.majorkik.ui.details.ui.compose.MovieImagePager
 import com.majorkik.ui.details.ui.compose.MovieTagline
 import com.ramcosta.composedestinations.annotation.Destination
-import io.dokar.expandabletext.ExpandableText
 import org.koin.androidx.compose.getViewModel
 
 @Destination(navArgsDelegate = MovieDetailsNavArgs::class)
@@ -60,11 +52,8 @@ internal fun MovieDetailsScreen(state: MovieDetailsViewState) {
 /**
  * Screen status for displaying basic movie information
  */
-@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun MovieDetailsContent(details: MovieDetails) {
-    var overviewExpanded by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -73,44 +62,16 @@ private fun MovieDetailsContent(details: MovieDetails) {
     ) {
         MovieImagePager(backdrops = details.backdrops)
         MovieHeader(details = details)
-
-
         // Expandable movie description
-        ExpandableText(
-            text = details.overview.orEmpty(),
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .animateContentSize()
-                .clickable { overviewExpanded = !overviewExpanded },
-            style = MBTheme.typography.body.textMedium,
-            color = MBTheme.colors.text.primary,
-            maxLines = 3,
-            expanded = overviewExpanded,
-            toggleContent = {
-                @StringRes val textRes = if (overviewExpanded) {
-                    StringResource.details_show_less
-                } else {
-                    StringResource.details_show_more
-                }
-
-                Text(
-                    text = " " + stringResource(textRes),
-                    style = MBTheme.typography.body.textMedium,
-                    color = MBTheme.colors.background.accent
-                )
-            }
-        )
-
+        MovieDescription(overview = details.overview)
         // Tagline
         MovieTagline(tagline = details.tagline)
-
         // Cast list (max. 5 people) and "More" button
         MovieCreditsBlock(
             casts = details.casts,
             totalAmount = details.casts.count() + details.crews.count(),
             modifier = Modifier.padding(horizontal = 12.dp)
         )
-
         // Detailed information about the film, budget, box office and more
         Column(
             modifier = Modifier.fillMaxWidth(),
