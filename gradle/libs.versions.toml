@@ -45,7 +45,6 @@ coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 androidx_activity_compose = "androidx.activity:activity-compose:1.7.2"
 androidx_core_ktx = "androidx.core:core-ktx:1.10.1"
 androidx_appcompat = "androidx.appcompat:appcompat:1.6.1"
-androidx_material = "com.google.android.material:material:1.9.0"
 androidx_lifecycle_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
 androidx_navigation_compose = "androidx.navigation:navigation-compose:2.7.0-rc01"
 androidx_datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
@@ -54,8 +53,6 @@ compose_compiler = { module = "androidx.compose.compiler:compiler", version.ref 
 androidx_compose_bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx_compose_bom" }
 androidx_compose_foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx_compose_foundation_layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
-androidx_compose_material_iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
-androidx_compose_material = { group = "androidx.compose.material", name = "material" }
 androidx_compose_material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx_compose_material3" }
 androidx_compose_material3_windowSizeClass = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "androidx_compose_material3" }
 androidx_compose_runtime = { group = "androidx.compose.runtime", name = "runtime" }
@@ -118,7 +115,6 @@ androidx_ui = [
     "androidx_activity_compose",
     "androidx_core_ktx",
     "androidx_appcompat",
-    "androidx_material",
     "androidx_lifecycle_ktx"
 ]
 compose_ui = [

@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,16 +35,13 @@ internal fun MovieActions(
         // Button to add a movie to the "will watch" list
         Button(
             onClick = onWillWatchClick,
-            elevation = ButtonDefaults.elevation(
-                defaultElevation = 0.dp, pressedElevation = 0.dp, hoveredElevation = 0.dp, focusedElevation = 0.dp
-            ),
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .height(48.dp)
                 .fillMaxWidth()
                 .weight(1f),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = MBTheme.colors.background.accent, contentColor = MBTheme.colors.text.primaryOnDark
+                containerColor = MBTheme.colors.background.accent, contentColor = MBTheme.colors.text.primaryOnDark
             )
         ) {
             Text(

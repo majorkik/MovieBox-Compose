@@ -4,9 +4,10 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
@@ -16,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.majorkik.core.ui.CoreDrawable
@@ -27,18 +27,17 @@ import com.ramcosta.composedestinations.spec.NavGraphSpec
 fun BottomNavigation(navController: NavController) {
     val currentSelectedItem by navController.currentScreenAsState()
 
-    BottomNavigation(
-        backgroundColor = MBTheme.colors.background.base,
+    NavigationBar(
+        containerColor = MBTheme.colors.background.base,
         modifier = Modifier
             .navigationBarsPadding()
             .imePadding()
             .background(MBTheme.colors.background.base),
-        elevation = 0.dp
     ) {
         BottomNavigationItems.forEach { item ->
             val isSelected = currentSelectedItem == item.screen
 
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected = isSelected,
                 onClick = {
                     navController.navigate(item.screen.route) {
@@ -52,7 +51,10 @@ fun BottomNavigation(navController: NavController) {
                 },
                 icon = {
                     BottomNavigationIcon(item = item, isSelected = isSelected)
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = MBTheme.colors.background.elevation1
+                )
             )
         }
     }
