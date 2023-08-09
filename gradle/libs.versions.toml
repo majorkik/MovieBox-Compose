@@ -9,7 +9,7 @@ koin_androidx_compose = "3.4.6"
 # Testing
 kotest = "5.3.0"
 # Gradle
-android_gradle_plugin = "8.2.0-alpha14"
+android_gradle_plugin = "8.2.0-alpha15"
 # Compose
 androidx_compose_bom = "2023.06.01"
 androidx_compose_material3 = "1.2.0-alpha04"
@@ -84,7 +84,6 @@ koin_test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 kotest_assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest_junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 # Accompanist
-accompanist_pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist_pager_indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist_insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
 accompanist_navigation_material = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }

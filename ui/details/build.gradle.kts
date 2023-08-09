@@ -29,7 +29,6 @@ dependencies {
     // Android
     implementation(libs.mvi.orbit)
     implementation(libs.coil)
-    implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.compose.destinations.core)
     implementation(libs.expandabletext)

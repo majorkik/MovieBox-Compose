@@ -51,7 +51,6 @@ dependencies {
     implementation(libs.accompanist.navigation.animation)
     implementation(libs.accompanist.navigation.material)
     implementation(libs.accompanist.insets)
-    implementation(libs.accompanist.pager)
     implementation(libs.accompanist.ui.controller)
 
     implementation(libs.compose.destinations.core)
