@@ -1,4 +1,4 @@
-package com.majorkik.ui.details.ui
+package com.majorkik.ui.details.ui.movie
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

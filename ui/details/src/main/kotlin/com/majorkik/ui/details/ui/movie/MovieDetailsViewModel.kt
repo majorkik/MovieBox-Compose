@@ -1,4 +1,4 @@
-package com.majorkik.ui.details.ui
+package com.majorkik.ui.details.ui.movie
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -40,8 +40,8 @@ internal class MovieDetailsViewModel(
 }
 
 sealed class State {
-    object LoadingState : State()
-    object ErrorState : State()
+    data object LoadingState : State()
+    data object ErrorState : State()
     data class MovieDetailsState(val data: MovieDetails) : State()
 }
 

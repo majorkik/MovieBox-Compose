@@ -66,16 +66,15 @@ fun NavHomeScreen(
     val viewModel: NavHomeViewModelViewModel = getViewModel()
     val state by viewModel.container.stateFlow.collectAsState()
 
-    NavHomeContent(
-        state = state,
+    NavHomeContent(state = state,
         actionToggleGenresMode = viewModel::toggleGenresMode,
         actionFetchPopularMovies = viewModel::fetchPopularMovies,
         actionFetchPopularTVs = viewModel::fetchPopularTVs,
         actionFetchTrendingMovies = viewModel::fetchTrendingMovies,
         actionFetchTrendingTVs = viewModel::fetchTrendingTVs,
         openMovieDetails = navigator::openMovieDetails,
-        openGenresList = { /* no-op */ }
-    )
+        openTVDetails = navigator::openTVDetails,
+        openGenresList = { /* no-op */ })
 
     LaunchedEffect(Unit) {
         launch {
@@ -96,6 +95,7 @@ internal fun NavHomeContent(
     actionFetchTrendingTVs: () -> Unit,
     actionFetchTrendingMovies: () -> Unit,
     openMovieDetails: (Int) -> Unit,
+    openTVDetails: (Int) -> Unit,
     openGenresList: (Genre) -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -118,16 +118,14 @@ internal fun NavHomeContent(
         )
 
         // Search bar with filter button
-        Box(
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .padding(horizontal = 16.dp)
-                .fillMaxWidth()
-                .height(48.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(MBTheme.colors.background.elevation1)
-                .clickableWithSimpleRipple { }
-        ) {
+        Box(modifier = Modifier
+            .padding(vertical = 16.dp)
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth()
+            .height(48.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(MBTheme.colors.background.elevation1)
+            .clickableWithSimpleRipple { }) {
             // Temporary stub for search without the ability to enter text
             Row(
                 modifier = Modifier
@@ -149,14 +147,12 @@ internal fun NavHomeContent(
             }
 
             // Filter button
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(MBTheme.colors.background.accent)
-                    .clickableWithSimpleRipple { }
-                    .align(Alignment.CenterEnd)
-            ) {
+            Box(modifier = Modifier
+                .size(48.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(MBTheme.colors.background.accent)
+                .clickableWithSimpleRipple { }
+                .align(Alignment.CenterEnd)) {
                 Icon(
                     painter = painterResource(id = CoreDrawable.ic_tune_white_24),
                     contentDescription = null,
@@ -183,13 +179,11 @@ internal fun NavHomeContent(
                 items = state.trendingTVsState.tvs,
                 onLoadMore = actionFetchTrendingTVs
             ) { item ->
-                VerticalMovieCard(
-                    posterPath = item.posterPath,
+                VerticalMovieCard(posterPath = item.posterPath,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
-                    onClick = {}
-                )
+                    onClick = { openTVDetails(item.id) })
             }
 
             // Endless list with popular tv shows
@@ -198,13 +192,11 @@ internal fun NavHomeContent(
                 items = state.popularTVsState.tvs,
                 onLoadMore = actionFetchPopularTVs
             ) { item ->
-                HorizontalMovieCard(
-                    backdropPath = item.backdropPath,
+                HorizontalMovieCard(backdropPath = item.backdropPath,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
-                    onClick = {}
-                )
+                    onClick = { openTVDetails(item.id) })
             }
 
             // Endless list with trending movies
@@ -213,13 +205,11 @@ internal fun NavHomeContent(
                 items = state.trendingMoviesState.movies,
                 onLoadMore = actionFetchTrendingMovies
             ) { item ->
-                VerticalMovieCard(
-                    posterPath = item.posterPath,
+                VerticalMovieCard(posterPath = item.posterPath,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
-                    onClick = { openMovieDetails(item.id) }
-                )
+                    onClick = { openMovieDetails(item.id) })
             }
 
             // Endless list with popular movies
@@ -228,13 +218,11 @@ internal fun NavHomeContent(
                 items = state.popularMoviesState.movies,
                 onLoadMore = actionFetchPopularMovies
             ) { item ->
-                HorizontalMovieCard(
-                    backdropPath = item.backdropPath,
+                HorizontalMovieCard(backdropPath = item.backdropPath,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
-                    onClick = { openMovieDetails(item.id) }
-                )
+                    onClick = { openMovieDetails(item.id) })
             }
         }
     }
@@ -262,8 +250,7 @@ fun GenresBlock(
             )
 
             GenresSwitchBox(
-                isMovieGenresSelected = isMovieGenresSelected,
-                onToggleSwitch = onToggle
+                isMovieGenresSelected = isMovieGenresSelected, onToggleSwitch = onToggle
             )
         }
 
@@ -354,19 +341,13 @@ private fun handleSideEffect(sideEffect: NavHomeViewModelSideEffect, context: Co
 private fun Preview() {
     MBTheme(isDark = true) {
         Surface(
-            color = MBTheme.colors.background.base, modifier = Modifier
-                .fillMaxWidth()
+            color = MBTheme.colors.background.base, modifier = Modifier.fillMaxWidth()
         ) {
-            GenresBlock(
-                genres = listOf(
-                    Genre(id = 1, name = "Action"),
-                    Genre(id = 2, name = "Adventure"),
-                    Genre(id = 3, name = "Science Fiction")
-                ),
-                isMovieGenresSelected = true,
-                onToggle = {},
-                onGenreClick = {}
-            )
+            GenresBlock(genres = listOf(
+                Genre(id = 1, name = "Action"),
+                Genre(id = 2, name = "Adventure"),
+                Genre(id = 3, name = "Science Fiction")
+            ), isMovieGenresSelected = true, onToggle = {}, onGenreClick = {})
         }
     }
 }
