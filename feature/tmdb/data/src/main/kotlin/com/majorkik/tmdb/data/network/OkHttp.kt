@@ -1,8 +1,8 @@
-package com.majorkik.tmdb.impl.network
+package com.majorkik.tmdb.data.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.majorkik.tmdb.api.UrlConstants
-import com.majorkik.tmdb.impl.Config
+import com.majorkik.tmdb.data.Config
 import com.slack.eithernet.ApiResultCallAdapterFactory
 import com.slack.eithernet.ApiResultConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi

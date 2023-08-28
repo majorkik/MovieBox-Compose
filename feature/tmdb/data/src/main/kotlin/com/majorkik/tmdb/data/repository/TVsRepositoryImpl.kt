@@ -1,15 +1,21 @@
-package com.majorkik.tmdb.impl.repository
+package com.majorkik.tmdb.data.repository
 
 import com.majorkik.tmdb.api.model.PagedTVsResult
-import com.majorkik.tmdb.api.model.TV
+import com.majorkik.tmdb.api.model.TVDetails
 import com.majorkik.tmdb.api.network.NetworkResult
 import com.majorkik.tmdb.api.repository.TVsRepository
-import com.majorkik.tmdb.impl.network.ApiService
-import com.majorkik.tmdb.impl.network.safeRequest
-import com.majorkik.tmdb.impl.network.suspendString
-import com.majorkik.tmdb.impl.response.toDomainModel
+import com.majorkik.tmdb.data.network.ApiService
+import com.majorkik.tmdb.data.network.KtorApiService
+import com.majorkik.tmdb.data.network.safeRequest
+import com.majorkik.tmdb.data.network.suspendString
+import com.majorkik.tmdb.data.response.toDomain
+import com.majorkik.tmdb.data.response.toDomainModel
 
-internal class TVsRepositoryImpl(private val api: ApiService) : TVsRepository {
+internal class TVsRepositoryImpl(
+    private val api: ApiService,
+    private val ktorApi: KtorApiService,
+) : TVsRepository {
+
     override suspend fun getPopularTVs(page: Int): NetworkResult<PagedTVsResult, String> {
         return safeRequest(
             call = { api.getPopularTVs(page = page) },
@@ -26,7 +32,5 @@ internal class TVsRepositoryImpl(private val api: ApiService) : TVsRepository {
         )
     }
 
-    suspend fun getTVShow(tvId: Int): TV {
-        return api.getTV(id = tvId).toDomainModel()
-    }
+    override suspend fun getTV(tvId: Int): TVDetails = ktorApi.getTV(tvId = tvId).toDomain()
 }

@@ -93,13 +93,13 @@ fun movieDetailsPreview() = MovieDetails(
         id = 1071588,
         name = "M3GAN Collection",
         poster = "/fS57wFKda3h5dtWS3sc9JffE05R.jpg",
-        backdrop = "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg"
+        backdrop = "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg",
     ),
     budget = 12000000,
     genres = listOf(
         MovieDetails.Genre(878, "Science Fiction"),
         MovieDetails.Genre(27, "Horror"),
-        MovieDetails.Genre(35, "Comedy")
+        MovieDetails.Genre(35, "Comedy"),
     ),
     homepage = "https://www.m3ganmovie.com",
     id = 536554,
@@ -117,11 +117,11 @@ fun movieDetailsPreview() = MovieDetails(
             id = 33,
             logo = "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
             name = "Universal Pictures",
-            originCountry = "US"
-        )
+            originCountry = "US",
+        ),
     ),
     productionCountries = listOf(
-        MovieDetails.ProductionCountry(iso = "US", name = "United States of America")
+        MovieDetails.ProductionCountry(iso = "US", name = "United States of America"),
     ),
     releaseDate = Date.invoke(year = 2022, month = 12, day = 28),
     revenue = 125398010,
@@ -136,12 +136,12 @@ fun movieDetailsPreview() = MovieDetails(
     posters = listOf(
         "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg".toPoster(),
         "/rxDPzExeovcBZY2IVWdYs87AzVE.jpg".toPoster(),
-        "/jTKHoMmaKHv6IlpKDcouusMZ48Z.jpg".toPoster()
+        "/jTKHoMmaKHv6IlpKDcouusMZ48Z.jpg".toPoster(),
     ),
     backdrops = listOf(
         "/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg".toBackdrop(),
         "/cEtnRjAdTXSITr33hhXSIPIIi3I.jpg".toBackdrop(),
-        "/otOtC45BDzFW7nuxnWHMmnYsicK.jpg".toBackdrop()
+        "/otOtC45BDzFW7nuxnWHMmnYsicK.jpg".toBackdrop(),
     ),
     casts = listOf(
         MovieDetails.Cast(
@@ -154,8 +154,8 @@ fun movieDetailsPreview() = MovieDetails(
             order = 7,
             originalName = "Allison Williams",
             popularity = 39.644,
-            profile = "/yBolxMiZL1EjmNogPzTAuT85qad.jpg".toProfile()
-        )
+            profile = "/yBolxMiZL1EjmNogPzTAuT85qad.jpg".toProfile(),
+        ),
     ),
     crews = listOf(
         MovieDetails.Crew(
@@ -167,7 +167,7 @@ fun movieDetailsPreview() = MovieDetails(
             name = "Terri Taylor",
             originalName = "Terri Taylor",
             popularity = 3.926,
-            profile = null
-        )
-    )
+            profile = null,
+        ),
+    ),
 )

@@ -1,4 +1,4 @@
-package com.majorkik.tmdb.impl.util
+package com.majorkik.tmdb.data.util
 
 import com.majorkik.common.tryParseDate
 import com.soywiz.klock.Date

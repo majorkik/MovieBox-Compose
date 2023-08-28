@@ -19,6 +19,13 @@ dependencies {
     implementation(libs.okhttp.bom.core)
     implementation(libs.okhttp.bom.interceptor)
 
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.json)
+    implementation(libs.ktor.negotiation)
+    implementation(libs.ktor.resource)
+
     implementation(platform(libs.arrow.bom))
     implementation(libs.arrow.core)
 
@@ -27,4 +34,12 @@ dependencies {
     implementation(libs.serialization.converter)
 
     implementation(libs.klock)
+
+    testImplementation(libs.ktor.mock)
+    testImplementation(libs.kotest.junit)
+    testImplementation(libs.kotest.assertions)
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }

@@ -1,7 +1,7 @@
-package com.majorkik.tmdb.impl.network
+package com.majorkik.tmdb.data.network
 
 import com.majorkik.tmdb.api.network.NetworkResult
-import com.majorkik.tmdb.impl.logger
+import com.majorkik.tmdb.data.logger
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

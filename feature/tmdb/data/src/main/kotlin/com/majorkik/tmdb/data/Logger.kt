@@ -1,4 +1,4 @@
-package com.majorkik.tmdb.impl
+package com.majorkik.tmdb.data
 
 import mu.KLogging
 

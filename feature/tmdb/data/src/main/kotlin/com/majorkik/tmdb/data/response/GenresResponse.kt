@@ -1,4 +1,4 @@
-package com.majorkik.tmdb.impl.response
+package com.majorkik.tmdb.data.response
 
 import com.majorkik.tmdb.api.model.Genre
 import kotlinx.serialization.SerialName

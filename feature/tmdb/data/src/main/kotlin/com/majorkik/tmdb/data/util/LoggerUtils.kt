@@ -1,6 +1,6 @@
-package com.majorkik.tmdb.impl.util
+package com.majorkik.tmdb.data.util
 
-import com.majorkik.tmdb.impl.logger
+import com.majorkik.tmdb.data.logger
 import com.slack.eithernet.ApiResult
 
 fun <T : Any> ApiResult.Failure<T>.printLog(): Unit = when (this) {

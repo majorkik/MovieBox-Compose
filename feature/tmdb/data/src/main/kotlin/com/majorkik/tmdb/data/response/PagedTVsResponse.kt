@@ -1,10 +1,10 @@
-package com.majorkik.tmdb.impl.response
+package com.majorkik.tmdb.data.response
 
 import com.majorkik.tmdb.api.model.PagedTVsResult
 import com.majorkik.tmdb.api.model.TV
 import com.majorkik.tmdb.api.model.image.toBackdrop
 import com.majorkik.tmdb.api.model.image.toPoster
-import com.majorkik.tmdb.impl.util.tryParseDateFromAPI
+import com.majorkik.tmdb.data.util.tryParseDateFromAPI
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
