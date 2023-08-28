@@ -28,12 +28,14 @@ internal class KtorApiServiceImpl(engine: HttpClientEngine) : KtorApiService {
     @OptIn(ExperimentalSerializationApi::class)
     internal val client = HttpClient(engine = engine) {
         install(ContentNegotiation) {
-            json(Json {
-                explicitNulls = false
-                ignoreUnknownKeys = true
-                isLenient = true
-                prettyPrint = true
-            })
+            json(
+                Json {
+                    explicitNulls = false
+                    ignoreUnknownKeys = true
+                    isLenient = true
+                    prettyPrint = true
+                }
+            )
         }
 
         install(HttpTimeout) {

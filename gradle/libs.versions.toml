@@ -9,6 +9,7 @@ koin = "3.4.3"
 koin_androidx_compose = "3.4.6"
 # Testing
 kotest = "5.6.2"
+mockk = "1.13.7"
 # Gradle
 android_gradle_plugin = "8.2.0-alpha15"
 # Compose
@@ -91,6 +92,7 @@ koin_test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 # Testing - assertation framework
 kotest_assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest_junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 # Accompanist
 accompanist_pager_indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist_insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }

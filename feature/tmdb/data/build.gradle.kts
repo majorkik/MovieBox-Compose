@@ -38,6 +38,7 @@ dependencies {
     testImplementation(libs.ktor.mock)
     testImplementation(libs.kotest.junit)
     testImplementation(libs.kotest.assertions)
+    testImplementation(libs.mockk)
 }
 
 tasks.withType<Test>().configureEach {

@@ -21,4 +21,3 @@ internal fun MockRequestHandleScope.jsonRespond(
     headers: Headers = headersOf(HttpHeaders.ContentType, "application/json"),
 ): HttpResponseData =
     respond(ByteReadChannel(content.toByteArray(Charsets.UTF_8)), status, headers)
-
