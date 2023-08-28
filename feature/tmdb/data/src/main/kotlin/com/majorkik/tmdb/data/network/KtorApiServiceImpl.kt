@@ -27,17 +27,13 @@ internal class KtorApiServiceImpl(engine: HttpClientEngine) : KtorApiService {
      */
     @OptIn(ExperimentalSerializationApi::class)
     internal val client = HttpClient(engine = engine) {
-        install(Logging)
-
         install(ContentNegotiation) {
-            json(
-                Json {
-                    explicitNulls = false
-                    ignoreUnknownKeys = true
-                    isLenient = true
-                    prettyPrint = true
-                },
-            )
+            json(Json {
+                explicitNulls = false
+                ignoreUnknownKeys = true
+                isLenient = true
+                prettyPrint = true
+            })
         }
 
         install(HttpTimeout) {
@@ -46,21 +42,21 @@ internal class KtorApiServiceImpl(engine: HttpClientEngine) : KtorApiService {
         }
 
         install(DefaultRequest) {
+            // Set base URL
+            url(UrlConstants.BASE_URL)
+            // Adding api_key qeury parameter to each requests
+            url { parameters.append("api_key", Config.TMDB_API_KEY) }
+            // Set default headers
             header(HttpHeaders.ContentType, ContentType.Application.Json)
-
-            url(UrlConstants.BASE_URL) {
-                parameters.append("api_key", Config.TMDB_API_KEY)
-            }
         }
 
         install(Resources)
+        install(Logging)
     }
 
-    // region TV
     override suspend fun getTV(tvId: Int): TVDetailsResponse {
         return client.get(TV.Id(id = tvId)).body()
     }
-    // endregion
 
     private companion object {
         private const val TIME_OUT_MS = 5_000L
