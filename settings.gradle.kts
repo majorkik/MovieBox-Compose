@@ -47,8 +47,8 @@ include(
 )
 // Features
 include(
-    ":feature:tmdb:api",
-    ":feature:tmdb:impl",
+    ":feature:tmdb:domain",
+    ":feature:tmdb:data",
     ":feature:app-preferences:api",
     ":feature:app-preferences:impl",
 )

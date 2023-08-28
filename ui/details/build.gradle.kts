@@ -23,7 +23,7 @@ dependencies {
     // Submodules
     implementation(projects.core.ui)
     implementation(projects.core.common)
-    implementation(projects.feature.tmdb.api)
+    implementation(projects.feature.tmdb.domain)
     implementation(projects.core.localizaton)
 
     // Android

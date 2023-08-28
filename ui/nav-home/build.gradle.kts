@@ -22,7 +22,7 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.ui)
-    implementation(projects.feature.tmdb.api)
+    implementation(projects.feature.tmdb.domain)
     implementation(projects.core.localizaton)
 
     implementation(libs.bundles.logging)
