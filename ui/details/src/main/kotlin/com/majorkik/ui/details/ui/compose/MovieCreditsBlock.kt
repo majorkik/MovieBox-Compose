@@ -25,7 +25,7 @@ import com.majorkik.core.ui.components.getSmallProfilePlaceholder
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.MovieDetails
-import com.majorkik.tmdb.api.model.ProfilePath
+import com.majorkik.tmdb.api.model.image.Profile
 import com.majorkik.tmdb.api.model.movieDetailsPreview
 
 @Composable
@@ -44,7 +44,7 @@ internal fun MovieCreditsBlock(
         ) {
             casts.take(n = 5).forEach { cast ->
                 AsyncImage(
-                    model = cast.profilePath?.build(size = ProfilePath.Size.Width45),
+                    model = cast.profile?.build(size = Profile.Size.Width45),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

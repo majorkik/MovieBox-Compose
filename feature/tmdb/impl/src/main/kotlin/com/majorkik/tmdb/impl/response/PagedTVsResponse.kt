@@ -2,15 +2,15 @@ package com.majorkik.tmdb.impl.response
 
 import com.majorkik.tmdb.api.model.PagedTVsResult
 import com.majorkik.tmdb.api.model.TV
-import com.majorkik.tmdb.api.model.toBackdropPath
-import com.majorkik.tmdb.api.model.toPosterPath
+import com.majorkik.tmdb.api.model.image.toBackdrop
+import com.majorkik.tmdb.api.model.image.toPoster
 import com.majorkik.tmdb.impl.util.tryParseDateFromAPI
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
 @Serializable
-data class PagedTVsResponse(
+internal data class PagedTVsResponse(
     @SerialName("page") val page: Int,
     @SerialName("results") val data: List<TV>,
     @SerialName("total_pages") val totalPages: Int,
@@ -47,7 +47,7 @@ internal fun PagedTVsResponse.toDomainModel() =
 internal fun PagedTVsResponse.TV.toDomainModel() =
     TV(
         adult = adult ?: false,
-        backdropPath = backdropPath?.toBackdropPath(),
+        backdrop = backdropPath?.toBackdrop(),
         genreIds = genreIds,
         id = id,
         originCountry = originCountry ?: listOf(),
@@ -55,7 +55,7 @@ internal fun PagedTVsResponse.TV.toDomainModel() =
         originalTitle = originalTitle ?: title,
         overview = overview,
         popularity = popularity,
-        posterPath = posterPath?.toPosterPath(),
+        poster = posterPath?.toPoster(),
         releaseDate = releaseDate?.let(::tryParseDateFromAPI),
         title = title,
         video = video ?: false,

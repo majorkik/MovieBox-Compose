@@ -29,14 +29,14 @@ import com.majorkik.common.percentOf
 import com.majorkik.core.ui.components.getPopcornPlaceholderResId
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
-import com.majorkik.tmdb.api.model.BackdropPath
-import com.majorkik.tmdb.api.model.PosterPath
+import com.majorkik.tmdb.api.model.image.Backdrop
+import com.majorkik.tmdb.api.model.image.Poster
 import com.soywiz.klock.Date
 import com.soywiz.klock.DateTime
 
 @Composable
 internal fun HorizontalMovieCard(
-    backdropPath: BackdropPath?,
+    backdrop: Backdrop?,
     title: String,
     voteAverage: Double,
     releaseDate: Date?,
@@ -54,7 +54,7 @@ internal fun HorizontalMovieCard(
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current)
-                    .data(data = backdropPath?.build(size = BackdropPath.Size.Width1280))
+                    .data(data = backdrop?.build(size = Backdrop.Size.Width1280))
                     .apply(block = {
                         crossfade(true)
                         placeholder(getPopcornPlaceholderResId())
@@ -103,7 +103,7 @@ internal fun HorizontalMovieCard(
 
 @Composable
 internal fun VerticalMovieCard(
-    posterPath: PosterPath?,
+    poster: Poster?,
     title: String,
     voteAverage: Double,
     releaseDate: Date?,
@@ -121,7 +121,7 @@ internal fun VerticalMovieCard(
             Image(
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
-                        .data(data = posterPath?.build(size = PosterPath.Size.Width500))
+                        .data(data = poster?.build(size = Poster.Size.Width500))
                         .apply(block = {
                             crossfade(true)
                             placeholder(getPopcornPlaceholderResId())
@@ -172,14 +172,14 @@ fun CardLightPreview() {
         Box(modifier = Modifier.background(MBTheme.colors.background.base)) {
             Column {
                 HorizontalMovieCard(
-                    backdropPath = null,
+                    backdrop = null,
                     title = "Dune",
                     voteAverage = 9.23,
                     releaseDate = DateTime.now().date
                 ) {}
 
                 VerticalMovieCard(
-                    posterPath = null,
+                    poster = null,
                     title = "Dune",
                     voteAverage = 9.23,
                     releaseDate = DateTime.now().date
@@ -196,14 +196,14 @@ fun CardDarkPreview() {
         Box(modifier = Modifier.background(MBTheme.colors.background.base)) {
             Column {
                 HorizontalMovieCard(
-                    backdropPath = null,
+                    backdrop = null,
                     title = "Dune",
                     voteAverage = 9.23,
                     releaseDate = DateTime.now().date
                 ) {}
 
                 VerticalMovieCard(
-                    posterPath = null,
+                    poster = null,
                     title = "Dune",
                     voteAverage = 9.23,
                     releaseDate = DateTime.now().date

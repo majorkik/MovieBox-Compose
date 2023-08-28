@@ -179,7 +179,7 @@ internal fun NavHomeContent(
                 items = state.trendingTVsState.tvs,
                 onLoadMore = actionFetchTrendingTVs
             ) { item ->
-                VerticalMovieCard(posterPath = item.posterPath,
+                VerticalMovieCard(poster = item.poster,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
@@ -192,7 +192,7 @@ internal fun NavHomeContent(
                 items = state.popularTVsState.tvs,
                 onLoadMore = actionFetchPopularTVs
             ) { item ->
-                HorizontalMovieCard(backdropPath = item.backdropPath,
+                HorizontalMovieCard(backdrop = item.backdrop,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
@@ -205,7 +205,7 @@ internal fun NavHomeContent(
                 items = state.trendingMoviesState.movies,
                 onLoadMore = actionFetchTrendingMovies
             ) { item ->
-                VerticalMovieCard(posterPath = item.posterPath,
+                VerticalMovieCard(poster = item.poster,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,
@@ -218,7 +218,7 @@ internal fun NavHomeContent(
                 items = state.popularMoviesState.movies,
                 onLoadMore = actionFetchPopularMovies
             ) { item ->
-                HorizontalMovieCard(backdropPath = item.backdropPath,
+                HorizontalMovieCard(backdrop = item.backdrop,
                     title = item.title,
                     voteAverage = item.voteAverage,
                     releaseDate = item.releaseDate,

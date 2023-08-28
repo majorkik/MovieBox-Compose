@@ -1,6 +1,7 @@
 package com.majorkik.tmdb.impl.repository
 
 import com.majorkik.tmdb.api.model.PagedTVsResult
+import com.majorkik.tmdb.api.model.TV
 import com.majorkik.tmdb.api.network.NetworkResult
 import com.majorkik.tmdb.api.repository.TVsRepository
 import com.majorkik.tmdb.impl.network.ApiService
@@ -23,5 +24,9 @@ internal class TVsRepositoryImpl(private val api: ApiService) : TVsRepository {
             onSuccess = { it?.toDomainModel() },
             onError = { it?.suspendString() ?: "Error when getting a list of trending TV shows" }
         )
+    }
+
+    suspend fun getTVShow(tvId: Int): TV {
+        return api.getTV(id = tvId).toDomainModel()
     }
 }

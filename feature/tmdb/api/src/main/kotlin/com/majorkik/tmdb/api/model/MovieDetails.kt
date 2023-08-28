@@ -1,10 +1,16 @@
 package com.majorkik.tmdb.api.model
 
+import com.majorkik.tmdb.api.model.image.Backdrop
+import com.majorkik.tmdb.api.model.image.Poster
+import com.majorkik.tmdb.api.model.image.Profile
+import com.majorkik.tmdb.api.model.image.toBackdrop
+import com.majorkik.tmdb.api.model.image.toPoster
+import com.majorkik.tmdb.api.model.image.toProfile
 import com.soywiz.klock.Date
 
 data class MovieDetails(
     val adult: Boolean,
-    val backdropPath: String?,
+    val backdrop: String?,
     val belongsToCollection: BelongsToCollection?,
     val budget: Long,
     val genres: List<Genre>,
@@ -15,7 +21,7 @@ data class MovieDetails(
     val originalTitle: String,
     val overview: String?,
     val popularity: Double,
-    val posterPath: String?,
+    val poster: String?,
     val productionCompanies: List<ProductionCompany>,
     val productionCountries: List<ProductionCountry>,
     val releaseDate: Date?,
@@ -28,25 +34,25 @@ data class MovieDetails(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int,
-    val posters: List<PosterPath>,
-    val backdrops: List<BackdropPath>,
+    val posters: List<Poster>,
+    val backdrops: List<Backdrop>,
     val casts: List<Cast>,
-    val crews: List<Crew>
+    val crews: List<Crew>,
 ) {
     data class Genre(val id: Long, val name: String)
 
     data class BelongsToCollection(
         val id: Long,
         val name: String,
-        val posterPath: String?,
-        val backdropPath: String?
+        val poster: String?,
+        val backdrop: String?,
     )
 
     data class ProductionCompany(
         val id: Long,
-        val logoPath: String?,
+        val logo: String?,
         val name: String,
-        val originCountry: String
+        val originCountry: String,
     )
 
     data class ProductionCountry(val iso: String, val name: String)
@@ -63,7 +69,7 @@ data class MovieDetails(
         val order: Int,
         val originalName: String,
         val popularity: Double,
-        val profilePath: ProfilePath?
+        val profile: Profile?,
     )
 
     data class Crew(
@@ -75,19 +81,19 @@ data class MovieDetails(
         val name: String,
         val originalName: String,
         val popularity: Double,
-        val profilePath: ProfilePath?
+        val profile: Profile?,
     )
 }
 
 @Suppress("Detekt.LongMethod", "Detekt.MagicNumber")
 fun movieDetailsPreview() = MovieDetails(
     adult = false,
-    backdropPath = "/dlrWhn0G3AtxYUx2D9P2bmzcsvF.jpg",
+    backdrop = "/dlrWhn0G3AtxYUx2D9P2bmzcsvF.jpg",
     belongsToCollection = MovieDetails.BelongsToCollection(
         id = 1071588,
         name = "M3GAN Collection",
-        posterPath = "/fS57wFKda3h5dtWS3sc9JffE05R.jpg",
-        backdropPath = "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg"
+        poster = "/fS57wFKda3h5dtWS3sc9JffE05R.jpg",
+        backdrop = "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg"
     ),
     budget = 12000000,
     genres = listOf(
@@ -105,11 +111,11 @@ fun movieDetailsPreview() = MovieDetails(
         "niece. But when the doll's programming works too well, she becomes overprotective" +
         " of her new friend with terrifying results.",
     popularity = 5792.786,
-    posterPath = "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg",
+    poster = "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg",
     productionCompanies = listOf(
         MovieDetails.ProductionCompany(
             id = 33,
-            logoPath = "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
+            logo = "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
             name = "Universal Pictures",
             originCountry = "US"
         )
@@ -128,14 +134,14 @@ fun movieDetailsPreview() = MovieDetails(
     voteAverage = 7.542,
     voteCount = 864,
     posters = listOf(
-        "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg".toPosterPath(),
-        "/rxDPzExeovcBZY2IVWdYs87AzVE.jpg".toPosterPath(),
-        "/jTKHoMmaKHv6IlpKDcouusMZ48Z.jpg".toPosterPath()
+        "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg".toPoster(),
+        "/rxDPzExeovcBZY2IVWdYs87AzVE.jpg".toPoster(),
+        "/jTKHoMmaKHv6IlpKDcouusMZ48Z.jpg".toPoster()
     ),
     backdrops = listOf(
-        "/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg".toBackdropPath(),
-        "/cEtnRjAdTXSITr33hhXSIPIIi3I.jpg".toBackdropPath(),
-        "/otOtC45BDzFW7nuxnWHMmnYsicK.jpg".toBackdropPath()
+        "/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg".toBackdrop(),
+        "/cEtnRjAdTXSITr33hhXSIPIIi3I.jpg".toBackdrop(),
+        "/otOtC45BDzFW7nuxnWHMmnYsicK.jpg".toBackdrop()
     ),
     casts = listOf(
         MovieDetails.Cast(
@@ -148,7 +154,7 @@ fun movieDetailsPreview() = MovieDetails(
             order = 7,
             originalName = "Allison Williams",
             popularity = 39.644,
-            profilePath = "/yBolxMiZL1EjmNogPzTAuT85qad.jpg".toProfilePath()
+            profile = "/yBolxMiZL1EjmNogPzTAuT85qad.jpg".toProfile()
         )
     ),
     crews = listOf(
@@ -161,7 +167,7 @@ fun movieDetailsPreview() = MovieDetails(
             name = "Terri Taylor",
             originalName = "Terri Taylor",
             popularity = 3.926,
-            profilePath = null
+            profile = null
         )
     )
 )

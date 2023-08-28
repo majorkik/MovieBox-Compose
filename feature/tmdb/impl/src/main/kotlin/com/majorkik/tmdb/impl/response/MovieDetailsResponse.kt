@@ -1,9 +1,9 @@
 package com.majorkik.tmdb.impl.response
 
 import com.majorkik.tmdb.api.model.MovieDetails
-import com.majorkik.tmdb.api.model.toBackdropPath
-import com.majorkik.tmdb.api.model.toPosterPath
-import com.majorkik.tmdb.api.model.toProfilePath
+import com.majorkik.tmdb.api.model.image.toBackdrop
+import com.majorkik.tmdb.api.model.image.toPoster
+import com.majorkik.tmdb.api.model.image.toProfile
 import com.majorkik.tmdb.impl.util.tryParseDateFromAPI
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -118,7 +118,7 @@ internal data class MovieDetailsResponse(
 internal fun MovieDetailsResponse.toDomainModel() =
     MovieDetails(
         adult = adult,
-        backdropPath = backdropPath,
+        backdrop = backdropPath,
         belongsToCollection = belongsToCollection?.toDomainModel(),
         budget = budget,
         genres = genres.map { it.toDomainModel() },
@@ -129,7 +129,7 @@ internal fun MovieDetailsResponse.toDomainModel() =
         originalTitle = originalTitle,
         overview = overview,
         popularity = popularity,
-        posterPath = posterPath,
+        poster = posterPath,
         productionCompanies = productionCompanies.map { it.toDomainModel() },
         productionCountries = productionCountries.map { it.toDomainModel() },
         releaseDate = releaseDate?.let(::tryParseDateFromAPI),
@@ -142,8 +142,8 @@ internal fun MovieDetailsResponse.toDomainModel() =
         video = video,
         voteAverage = voteAverage,
         voteCount = voteCount,
-        posters = images?.posters?.mapNotNull { it.filePath?.toPosterPath() }.orEmpty(),
-        backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdropPath() }.orEmpty(),
+        posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty(),
+        backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty(),
         casts = credits?.cast?.map { it.toDomainModel() }.orEmpty(),
         crews = credits?.crew?.map { it.toDomainModel() }.orEmpty()
     )
@@ -154,14 +154,14 @@ internal fun MovieDetailsResponse.BelongsToCollection.toDomainModel() =
     MovieDetails.BelongsToCollection(
         id = id,
         name = name,
-        posterPath = posterPath,
-        backdropPath = backdropPath
+        poster = posterPath,
+        backdrop = backdropPath
     )
 
 internal fun MovieDetailsResponse.ProductionCompany.toDomainModel() =
     MovieDetails.ProductionCompany(
         id = id,
-        logoPath = logoPath,
+        logo = logoPath,
         name = name,
         originCountry = originCountry
     )
@@ -183,7 +183,7 @@ internal fun MovieDetailsResponse.Credits.Cast.toDomainModel() =
         originalName = originalName,
         order = order,
         popularity = popularity,
-        profilePath = profilePath?.toProfilePath()
+        profile = profilePath?.toProfile()
     )
 
 internal fun MovieDetailsResponse.Credits.Crew.toDomainModel() =
@@ -196,5 +196,5 @@ internal fun MovieDetailsResponse.Credits.Crew.toDomainModel() =
         name = name,
         originalName = originalName,
         popularity = popularity,
-        profilePath = profilePath?.toProfilePath()
+        profile = profilePath?.toProfile()
     )

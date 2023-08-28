@@ -1,17 +1,14 @@
-package com.majorkik.tmdb.api.model
+package com.majorkik.tmdb.api.model.image
 
 import com.majorkik.tmdb.api.UrlConstants
 
 @JvmInline
-value class PosterPath(val value: String) {
+value class Still(val value: String) {
     @Suppress("unused")
     enum class Size(val path: String) {
-        Width92("w92"),
-        Width154("w154"),
+        Width45("w92"),
         Width185("w185"),
-        Width342("w342"),
-        Width500("w500"),
-        Width780("w780"),
+        Width300("w300"),
         Original("original"),
     }
 
@@ -20,4 +17,4 @@ value class PosterPath(val value: String) {
     }
 }
 
-fun String.toPosterPath() = PosterPath(value = this)
+fun String.toStill() = Still(value = this)
