@@ -6,6 +6,7 @@ import com.majorkik.tmdb.api.model.image.toLogo
 import com.majorkik.tmdb.api.model.image.toPoster
 import com.majorkik.tmdb.api.model.image.toProfile
 import com.majorkik.tmdb.api.model.image.toStill
+import com.majorkik.tmdb.data.util.tryParseDateFromAPI
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,10 +23,10 @@ internal data class TVDetailsResponse(
     @SerialName("in_production") val inProduction: Boolean,
     @SerialName("languages") val languages: List<String>,
     @SerialName("last_air_date") val lastAirDate: String?,
-    @SerialName("last_episode_to_air") val lastEpisodeToAir: LastEpisodeToAir,
+    @SerialName("last_episode_to_air") val episode: Episode,
     @SerialName("name") val name: String,
     @SerialName("networks") val networks: List<Network>,
-    @SerialName("next_episode_to_air") val nextEpisodeToAir: String?,
+    @SerialName("next_episode_to_air") val nextEpisodeToAir: Episode?,
     @SerialName("number_of_episodes") val numberOfEpisodes: Int,
     @SerialName("number_of_seasons") val numberOfSeasons: Int,
     @SerialName("origin_country") val originCountry: List<String>,
@@ -43,6 +44,7 @@ internal data class TVDetailsResponse(
     @SerialName("type") val type: String,
     @SerialName("vote_average") val voteAverage: Double,
     @SerialName("vote_count") val voteCount: Int,
+    @SerialName("images") val images: Images?,
 ) {
     @Serializable
     data class CreatedBy(
@@ -57,7 +59,7 @@ internal data class TVDetailsResponse(
     data class Genre(@SerialName("id") val id: Int, @SerialName("name") val name: String)
 
     @Serializable
-    data class LastEpisodeToAir(
+    data class Episode(
         @SerialName("air_date") val airDate: String,
         @SerialName("episode_number") val episodeNumber: Int,
         @SerialName("id") val id: Int,
@@ -111,6 +113,18 @@ internal data class TVDetailsResponse(
         @SerialName("iso_639_1") val iso6391: String,
         @SerialName("name") val name: String,
     )
+
+    @Serializable
+    data class Images(
+        @SerialName("backdrops") val backdrops: List<Image>,
+        @SerialName("posters") val posters: List<Image>,
+    ) {
+        @Serializable
+        data class Image(
+            @SerialName("aspect_ratio") val aspectRatio: Double?,
+            @SerialName("file_path") val filePath: String?,
+        )
+    }
 }
 
 internal fun TVDetailsResponse.toDomain() = TVDetails(
@@ -118,17 +132,17 @@ internal fun TVDetailsResponse.toDomain() = TVDetails(
     backdrop = backdropPath?.toBackdrop(),
     createdBy = createdBy.map(TVDetailsResponse.CreatedBy::toDomain),
     episodeRunTime = episodeRunTime,
-    firstAirDate = firstAirDate,
+    firstAirDate = firstAirDate?.let(::tryParseDateFromAPI),
     genres = genres.map(TVDetailsResponse.Genre::toDomain),
     homepage = homepage,
     id = id,
     inProduction = inProduction,
     languages = languages,
-    lastAirDate = lastAirDate,
-    lastEpisodeToAir = lastEpisodeToAir.toDomain(),
+    lastAirDate = lastAirDate?.let(::tryParseDateFromAPI),
+    episode = episode.toDomain(),
     name = name,
     networks = networks.map(TVDetailsResponse.Network::toDomain),
-    nextEpisodeToAir = nextEpisodeToAir,
+    nextEpisodeToAir = nextEpisodeToAir?.toDomain(),
     numberOfEpisodes = numberOfEpisodes,
     numberOfSeasons = numberOfSeasons,
     originCountry = originCountry,
@@ -146,6 +160,8 @@ internal fun TVDetailsResponse.toDomain() = TVDetails(
     type = type,
     voteAverage = voteAverage,
     voteCount = voteCount,
+    posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty(),
+    backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty(),
 )
 
 internal fun TVDetailsResponse.CreatedBy.toDomain() = TVDetails.CreatedBy(
@@ -158,8 +174,8 @@ internal fun TVDetailsResponse.CreatedBy.toDomain() = TVDetails.CreatedBy(
 
 internal fun TVDetailsResponse.Genre.toDomain() = TVDetails.Genre(id = id, name = name)
 
-internal fun TVDetailsResponse.LastEpisodeToAir.toDomain() = TVDetails.LastEpisodeToAir(
-    airDate = airDate,
+internal fun TVDetailsResponse.Episode.toDomain() = TVDetails.Episode(
+    airDate = airDate.let(::tryParseDateFromAPI),
     episodeNumber = episodeNumber,
     id = id,
     name = name,
@@ -175,7 +191,7 @@ internal fun TVDetailsResponse.LastEpisodeToAir.toDomain() = TVDetails.LastEpiso
 
 internal fun TVDetailsResponse.Network.toDomain() = TVDetails.Network(
     id = id,
-    logo = logoPath?.toLogo(),
+    logo = logoPath.toLogo(),
     name = name,
     originCountry = originCountry,
 )
@@ -193,7 +209,7 @@ internal fun TVDetailsResponse.ProductionCountry.toDomain() = TVDetails.Producti
 )
 
 internal fun TVDetailsResponse.Season.toDomain() = TVDetails.Season(
-    airDate = airDate,
+    airDate = airDate.let(::tryParseDateFromAPI),
     episodeCount = episodeCount,
     id = id,
     name = name,

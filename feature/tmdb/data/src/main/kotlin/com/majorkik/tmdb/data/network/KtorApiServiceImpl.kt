@@ -46,7 +46,7 @@ internal class KtorApiServiceImpl(engine: HttpClientEngine) : KtorApiService {
         install(DefaultRequest) {
             // Set base URL
             url(UrlConstants.BASE_URL)
-            // Adding api_key qeury parameter to each requests
+            // Adding api_key query parameter to each requests
             url { parameters.append("api_key", Config.TMDB_API_KEY) }
             // Set default headers
             header(HttpHeaders.ContentType, ContentType.Application.Json)
@@ -57,7 +57,7 @@ internal class KtorApiServiceImpl(engine: HttpClientEngine) : KtorApiService {
     }
 
     override suspend fun getTV(tvId: Int): TVDetailsResponse {
-        return client.get(TV.Id(id = tvId)).body()
+        return client.get(TV.Id(id = tvId, appendToResponse = "images")).body()
     }
 
     private companion object {

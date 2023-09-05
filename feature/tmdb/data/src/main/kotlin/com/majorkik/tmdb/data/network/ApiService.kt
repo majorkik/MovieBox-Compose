@@ -4,7 +4,6 @@ import com.majorkik.tmdb.data.response.GenresResponse
 import com.majorkik.tmdb.data.response.MovieDetailsResponse
 import com.majorkik.tmdb.data.response.PagedMoviesResponse
 import com.majorkik.tmdb.data.response.PagedTVsResponse
-import com.majorkik.tmdb.data.response.TVDetailsResponse
 import com.slack.eithernet.ApiResult
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,13 +27,6 @@ internal interface ApiService {
 
     @GET("trending/movie/week")
     suspend fun getTrendingMovies(@Query("page") page: Int): Response<PagedMoviesResponse>
-
-    @GET("tv/{tv_id}")
-    suspend fun getTV(
-        @Path("movie_id") id: Int,
-        @Query("append_to_response") appendToResponse: String? = null,
-        @Query("language") language: String = DEFAULT_LANGUAGE,
-    ): TVDetailsResponse
 
     @GET("tv/popular")
     suspend fun getPopularTVs(

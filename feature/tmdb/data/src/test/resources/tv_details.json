@@ -57,7 +57,20 @@
     "still_path": "/zBi2O5EJfgTS6Ae0HdAYLm9o2nf.jpg"
   },
   "name": "Game of Thrones",
-  "next_episode_to_air": null,
+  "next_episode_to_air": {
+    "id": 1551830,
+    "name": "The Iron Throne",
+    "overview": "In the aftermath of the devastating attack on King's Landing, Daenerys must face the survivors.",
+    "vote_average": 4.809,
+    "vote_count": 241,
+    "air_date": "2019-05-19",
+    "episode_number": 6,
+    "production_code": "806",
+    "runtime": 80,
+    "season_number": 8,
+    "show_id": 1399,
+    "still_path": "/zBi2O5EJfgTS6Ae0HdAYLm9o2nf.jpg"
+  },
   "networks": [
     {
       "id": 49,
