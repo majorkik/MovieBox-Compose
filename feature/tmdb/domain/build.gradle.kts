@@ -13,4 +13,5 @@ dependencies {
 
     implementation(libs.bundles.logging)
     implementation(libs.klock)
+    implementation(libs.kotlinx.immutablelist)
 }

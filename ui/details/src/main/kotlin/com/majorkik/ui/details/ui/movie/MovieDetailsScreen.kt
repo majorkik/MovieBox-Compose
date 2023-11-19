@@ -20,12 +20,13 @@ import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.movieDetailsPreview
-import com.majorkik.ui.details.ui.compose.MovieCreditsBlock
-import com.majorkik.ui.details.ui.compose.MovieDescription
-import com.majorkik.ui.details.ui.compose.MovieDetailsBlock
-import com.majorkik.ui.details.ui.compose.MovieHeader
-import com.majorkik.ui.details.ui.compose.MovieImagePager
-import com.majorkik.ui.details.ui.compose.MovieTagline
+import com.majorkik.ui.details.ui.compose.ImagePager
+import com.majorkik.ui.details.ui.compose.movie.MovieActions
+import com.majorkik.ui.details.ui.compose.movie.MovieCreditsBlock
+import com.majorkik.ui.details.ui.compose.movie.MovieDescription
+import com.majorkik.ui.details.ui.compose.movie.MovieDetailsBlock
+import com.majorkik.ui.details.ui.compose.movie.MovieHeader
+import com.majorkik.ui.details.ui.compose.movie.MovieTagline
 import com.ramcosta.composedestinations.annotation.Destination
 import org.koin.androidx.compose.getViewModel
 
@@ -60,8 +61,12 @@ private fun MovieDetailsContent(details: MovieDetails) {
             .verticalScroll(state = rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        MovieImagePager(backdrops = details.backdrops)
+        // Movie image pager
+        ImagePager(backdrops = details.backdrops)
+        // Header under image pager
         MovieHeader(details = details)
+        // Movie action block
+        MovieActions(onWillWatchClick = { }, onBookmarksClick = { }, onFavoriteClick = {})
         // Expandable movie description
         MovieDescription(overview = details.overview)
         // Tagline
@@ -74,15 +79,12 @@ private fun MovieDetailsContent(details: MovieDetails) {
         )
         // Detailed information about the film, budget, box office and more
         Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(space = 8.dp)
+            modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(space = 8.dp)
         ) {
             // Film's budget-to-revenue ratio
             MovieDetailsBlock(
                 title = stringResource(
-                    StringResource.details_revenue_slash_budget_value,
-                    details.revenue,
-                    details.budget
+                    StringResource.details_revenue_slash_budget_value, details.revenue, details.budget
                 ),
                 description = stringResource(StringResource.details_revenue_slash_budget),
                 modifier = Modifier.padding(horizontal = 16.dp)

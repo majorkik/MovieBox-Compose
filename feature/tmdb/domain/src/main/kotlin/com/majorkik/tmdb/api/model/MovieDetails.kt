@@ -7,13 +7,15 @@ import com.majorkik.tmdb.api.model.image.toBackdrop
 import com.majorkik.tmdb.api.model.image.toPoster
 import com.majorkik.tmdb.api.model.image.toProfile
 import com.soywiz.klock.Date
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 data class MovieDetails(
     val adult: Boolean,
     val backdrop: String?,
     val belongsToCollection: BelongsToCollection?,
     val budget: Long,
-    val genres: List<Genre>,
+    val genres: ImmutableList<Genre>,
     val homepage: String?,
     val id: Long,
     val imdbId: String?,
@@ -22,22 +24,22 @@ data class MovieDetails(
     val overview: String?,
     val popularity: Double,
     val poster: String?,
-    val productionCompanies: List<ProductionCompany>,
-    val productionCountries: List<ProductionCountry>,
+    val productionCompanies: ImmutableList<ProductionCompany>,
+    val productionCountries: ImmutableList<ProductionCountry>,
     val releaseDate: Date?,
     val revenue: Long,
     val runtime: Int?,
-    val spokenLanguages: List<SpokenLanguage>,
+    val spokenLanguages: ImmutableList<SpokenLanguage>,
     val status: String,
     val tagline: String?,
     val title: String,
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int,
-    val posters: List<Poster>,
-    val backdrops: List<Backdrop>,
-    val casts: List<Cast>,
-    val crews: List<Crew>,
+    val posters: ImmutableList<Poster>,
+    val backdrops: ImmutableList<Backdrop>,
+    val casts: ImmutableList<Cast>,
+    val crews: ImmutableList<Crew>,
 ) {
     data class Genre(val id: Long, val name: String)
 
@@ -96,7 +98,7 @@ fun movieDetailsPreview() = MovieDetails(
         backdrop = "/uXEJwb8y67vFLaJb4wvHbSH6PjT.jpg",
     ),
     budget = 12000000,
-    genres = listOf(
+    genres = persistentListOf(
         MovieDetails.Genre(878, "Science Fiction"),
         MovieDetails.Genre(27, "Horror"),
         MovieDetails.Genre(35, "Comedy"),
@@ -112,7 +114,7 @@ fun movieDetailsPreview() = MovieDetails(
         " of her new friend with terrifying results.",
     popularity = 5792.786,
     poster = "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg",
-    productionCompanies = listOf(
+    productionCompanies = persistentListOf(
         MovieDetails.ProductionCompany(
             id = 33,
             logo = "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
@@ -120,30 +122,30 @@ fun movieDetailsPreview() = MovieDetails(
             originCountry = "US",
         ),
     ),
-    productionCountries = listOf(
+    productionCountries = persistentListOf(
         MovieDetails.ProductionCountry(iso = "US", name = "United States of America"),
     ),
     releaseDate = Date.invoke(year = 2022, month = 12, day = 28),
     revenue = 125398010,
     runtime = 102,
-    spokenLanguages = listOf(MovieDetails.SpokenLanguage(iso = "English", name = "English")),
+    spokenLanguages = persistentListOf(MovieDetails.SpokenLanguage(iso = "English", name = "English")),
     status = "Released",
     tagline = "Friendship has evolved.",
     title = "M3GAN",
     video = false,
     voteAverage = 7.542,
     voteCount = 864,
-    posters = listOf(
+    posters = persistentListOf(
         "/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg".toPoster(),
         "/rxDPzExeovcBZY2IVWdYs87AzVE.jpg".toPoster(),
         "/jTKHoMmaKHv6IlpKDcouusMZ48Z.jpg".toPoster(),
     ),
-    backdrops = listOf(
+    backdrops = persistentListOf(
         "/q2fY4kMXKoGv4CQf310MCxpXlRI.jpg".toBackdrop(),
         "/cEtnRjAdTXSITr33hhXSIPIIi3I.jpg".toBackdrop(),
         "/otOtC45BDzFW7nuxnWHMmnYsicK.jpg".toBackdrop(),
     ),
-    casts = listOf(
+    casts = persistentListOf(
         MovieDetails.Cast(
             castId = 7,
             character = "Gemma",
@@ -157,7 +159,7 @@ fun movieDetailsPreview() = MovieDetails(
             profile = "/yBolxMiZL1EjmNogPzTAuT85qad.jpg".toProfile(),
         ),
     ),
-    crews = listOf(
+    crews = persistentListOf(
         MovieDetails.Crew(
             creditId = "63462598b3e627008281db60",
             department = "Production",

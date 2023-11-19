@@ -1,4 +1,4 @@
-package com.majorkik.ui.details.ui.compose
+package com.majorkik.ui.details.ui.compose.movie
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility

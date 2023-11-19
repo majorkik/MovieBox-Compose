@@ -43,6 +43,7 @@ dependencies {
     // Utils
     implementation(libs.bundles.logging)
     implementation(libs.klock)
+    implementation(libs.kotlinx.immutablelist)
 
     // KSP
     ksp(libs.compose.destinations.ksp)

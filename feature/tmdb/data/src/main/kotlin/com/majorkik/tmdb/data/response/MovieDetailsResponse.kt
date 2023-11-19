@@ -5,6 +5,7 @@ import com.majorkik.tmdb.api.model.image.toBackdrop
 import com.majorkik.tmdb.api.model.image.toPoster
 import com.majorkik.tmdb.api.model.image.toProfile
 import com.majorkik.tmdb.data.util.tryParseDateFromAPI
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -120,7 +121,7 @@ internal fun MovieDetailsResponse.toDomainModel() = MovieDetails(
     backdrop = backdropPath,
     belongsToCollection = belongsToCollection?.toDomainModel(),
     budget = budget,
-    genres = genres.map { it.toDomainModel() },
+    genres = genres.map { it.toDomainModel() }.toPersistentList(),
     homepage = homepage,
     id = id,
     imdbId = imdbId,
@@ -129,22 +130,22 @@ internal fun MovieDetailsResponse.toDomainModel() = MovieDetails(
     overview = overview,
     popularity = popularity,
     poster = posterPath,
-    productionCompanies = productionCompanies.map { it.toDomainModel() },
-    productionCountries = productionCountries.map { it.toDomainModel() },
+    productionCompanies = productionCompanies.map { it.toDomainModel() }.toPersistentList(),
+    productionCountries = productionCountries.map { it.toDomainModel() }.toPersistentList(),
     releaseDate = releaseDate?.let(::tryParseDateFromAPI),
     revenue = revenue,
     runtime = runtime,
-    spokenLanguages = spokenLanguages.map { it.toDomainModel() },
+    spokenLanguages = spokenLanguages.map { it.toDomainModel() }.toPersistentList(),
     status = status,
     tagline = tagline,
     title = title,
     video = video,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty(),
-    backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty(),
-    casts = credits?.cast?.map { it.toDomainModel() }.orEmpty(),
-    crews = credits?.crew?.map { it.toDomainModel() }.orEmpty(),
+    posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty().toPersistentList(),
+    backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty().toPersistentList(),
+    casts = credits?.cast?.map { it.toDomainModel() }.orEmpty().toPersistentList(),
+    crews = credits?.crew?.map { it.toDomainModel() }.orEmpty().toPersistentList(),
 )
 
 internal fun MovieDetailsResponse.Genre.toDomainModel() = MovieDetails.Genre(id = id, name = name)

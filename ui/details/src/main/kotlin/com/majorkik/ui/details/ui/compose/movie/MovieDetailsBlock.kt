@@ -1,4 +1,4 @@
-package com.majorkik.ui.details.ui.compose
+package com.majorkik.ui.details.ui.compose.movie
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

@@ -7,6 +7,7 @@ import com.majorkik.tmdb.api.model.image.toPoster
 import com.majorkik.tmdb.api.model.image.toProfile
 import com.majorkik.tmdb.api.model.image.toStill
 import com.majorkik.tmdb.data.util.tryParseDateFromAPI
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -130,38 +131,38 @@ internal data class TVDetailsResponse(
 internal fun TVDetailsResponse.toDomain() = TVDetails(
     adult = adult,
     backdrop = backdropPath?.toBackdrop(),
-    createdBy = createdBy.map(TVDetailsResponse.CreatedBy::toDomain),
-    episodeRunTime = episodeRunTime,
+    createdBy = createdBy.map(TVDetailsResponse.CreatedBy::toDomain).toPersistentList(),
+    episodeRunTime = episodeRunTime.toPersistentList(),
     firstAirDate = firstAirDate?.let(::tryParseDateFromAPI),
-    genres = genres.map(TVDetailsResponse.Genre::toDomain),
+    genres = genres.map(TVDetailsResponse.Genre::toDomain).toPersistentList(),
     homepage = homepage,
     id = id,
     inProduction = inProduction,
-    languages = languages,
+    languages = languages.toPersistentList(),
     lastAirDate = lastAirDate?.let(::tryParseDateFromAPI),
     episode = episode.toDomain(),
     name = name,
-    networks = networks.map(TVDetailsResponse.Network::toDomain),
+    networks = networks.map(TVDetailsResponse.Network::toDomain).toPersistentList(),
     nextEpisodeToAir = nextEpisodeToAir?.toDomain(),
     numberOfEpisodes = numberOfEpisodes,
     numberOfSeasons = numberOfSeasons,
-    originCountry = originCountry,
+    originCountry = originCountry.toPersistentList(),
     originalLanguage = originalLanguage,
     originalName = originalName,
     overview = overview,
     popularity = popularity,
     poster = posterPath?.toPoster(),
-    productionCompanies = productionCompanies.map(TVDetailsResponse.ProductionCompany::toDomain),
-    productionCountries = productionCountries.map(TVDetailsResponse.ProductionCountry::toDomain),
-    seasons = seasons.map(TVDetailsResponse.Season::toDomain),
-    spokenLanguages = spokenLanguages.map(TVDetailsResponse.SpokenLanguage::toDomain),
+    productionCompanies = productionCompanies.map(TVDetailsResponse.ProductionCompany::toDomain).toPersistentList(),
+    productionCountries = productionCountries.map(TVDetailsResponse.ProductionCountry::toDomain).toPersistentList(),
+    seasons = seasons.map(TVDetailsResponse.Season::toDomain).toPersistentList(),
+    spokenLanguages = spokenLanguages.map(TVDetailsResponse.SpokenLanguage::toDomain).toPersistentList(),
     status = status,
     tagline = tagline,
     type = type,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty(),
-    backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty(),
+    posters = images?.posters?.mapNotNull { it.filePath?.toPoster() }.orEmpty().toPersistentList(),
+    backdrops = images?.backdrops?.mapNotNull { it.filePath?.toBackdrop() }.orEmpty().toPersistentList(),
 )
 
 internal fun TVDetailsResponse.CreatedBy.toDomain() = TVDetails.CreatedBy(

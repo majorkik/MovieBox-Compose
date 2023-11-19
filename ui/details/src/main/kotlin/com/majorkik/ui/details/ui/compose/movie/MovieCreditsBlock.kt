@@ -1,4 +1,4 @@
-package com.majorkik.ui.details.ui.compose
+package com.majorkik.ui.details.ui.compose.movie
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,10 +27,12 @@ import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.image.Profile
 import com.majorkik.tmdb.api.model.movieDetailsPreview
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 internal fun MovieCreditsBlock(
-    casts: List<MovieDetails.Cast>,
+    casts: ImmutableList<MovieDetails.Cast>,
     totalAmount: Int,
     modifier: Modifier = Modifier,
 ) {
@@ -102,6 +104,6 @@ private fun MovieActionsPreview() {
     MBTheme {
         val details = movieDetailsPreview()
 
-        MovieCreditsBlock(casts = details.casts, totalAmount = details.casts.count())
+        MovieCreditsBlock(casts = details.casts.toPersistentList(), totalAmount = details.casts.count())
     }
 }

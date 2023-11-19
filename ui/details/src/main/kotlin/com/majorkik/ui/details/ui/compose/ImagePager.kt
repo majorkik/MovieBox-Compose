@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.tmdb.api.model.image.Backdrop
-import com.majorkik.tmdb.api.model.movieDetailsPreview
 import com.majorkik.tmdb.api.model.image.original
+import com.majorkik.tmdb.api.model.movieDetailsPreview
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun MovieImagePager(backdrops: List<Backdrop>) {
+internal fun ImagePager(backdrops: ImmutableList<Backdrop>) {
     val pagerState = rememberPagerState { backdrops.size }
 
     HorizontalPager(state = pagerState) { page ->
@@ -35,10 +37,10 @@ internal fun MovieImagePager(backdrops: List<Backdrop>) {
 
 @Preview(showBackground = true)
 @Composable
-private fun MovieActionsPreview() {
+private fun ImagePagerPreview() {
     MBTheme {
         val details = movieDetailsPreview()
 
-        MovieImagePager(backdrops = details.backdrops)
+        ImagePager(backdrops = details.backdrops.toPersistentList())
     }
 }

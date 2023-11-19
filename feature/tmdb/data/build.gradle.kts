@@ -13,6 +13,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coroutines.core)
 
+    implementation(libs.kotlinx.immutablelist)
+
     implementation(libs.koin.core)
 
     implementation(platform(libs.okhttp.bom))

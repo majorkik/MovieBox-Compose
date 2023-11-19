@@ -1,5 +1,6 @@
 package com.majorkik.ui.details.ui.movie
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import arrow.core.Either
@@ -30,7 +31,9 @@ internal class MovieDetailsViewModel(
     private fun actionFetchMovieDetails(id: Int) = intent {
         when (val result = getMovieDetailsByIdUseCase(id)) {
             is Either.Left -> updateState(State.ErrorState)
-            is Either.Right -> updateState(State.MovieDetailsState(data = result.value))
+            is Either.Right -> {
+                updateState(State.MovieDetailsState(data = result.value))
+            }
         }
     }
 
@@ -39,15 +42,17 @@ internal class MovieDetailsViewModel(
     }
 }
 
-sealed class State {
+@Immutable
+internal sealed class State {
     data object LoadingState : State()
     data object ErrorState : State()
     data class MovieDetailsState(val data: MovieDetails) : State()
 }
 
-data class MovieDetailsViewState(
-    val screen: State = State.LoadingState
+@Immutable
+internal data class MovieDetailsViewState(
+    val screen: State = State.LoadingState,
 )
 
-sealed class MovieDetailsSideEffect
+internal sealed class MovieDetailsSideEffect
 

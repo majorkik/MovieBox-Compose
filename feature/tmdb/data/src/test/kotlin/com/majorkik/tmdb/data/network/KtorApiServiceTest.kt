@@ -7,7 +7,7 @@ import io.ktor.serialization.JsonConvertException
 
 class KtorApiServiceTest : StringSpec({
 
-    "Serializing json to TVDetailsRespoonse model" {
+    "Serializing json to TVDetailsResponse model" {
         val mockEngine = simpleMockEngine("/tv_details.json")
         val api = KtorApiServiceImpl(engine = mockEngine)
 

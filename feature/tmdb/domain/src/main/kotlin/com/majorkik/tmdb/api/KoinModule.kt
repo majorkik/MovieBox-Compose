@@ -7,8 +7,6 @@ import com.majorkik.tmdb.api.usecase.GetTVDetailsUseCase
 import org.koin.dsl.module
 
 val tmdbApiModule = module {
-    single {
-        GetMovieDetailsByIdUseCase(get<MovieDetailsRepository>()::getMovieDetailsById)
-        GetTVDetailsUseCase(get<TVsRepository>()::getTV)
-    }
+    single { GetMovieDetailsByIdUseCase(get<MovieDetailsRepository>()::getMovieDetailsById) }
+    single { GetTVDetailsUseCase(get<TVsRepository>()::getTV) }
 }
