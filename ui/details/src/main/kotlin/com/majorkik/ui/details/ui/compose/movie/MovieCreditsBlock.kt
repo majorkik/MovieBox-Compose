@@ -17,13 +17,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.components.getSmallProfilePlaceholder
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.image.Profile
 import com.majorkik.tmdb.api.model.movieDetailsPreview
@@ -98,7 +98,7 @@ internal fun MovieCreditsBlock(
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun MovieActionsPreview() {
     MBTheme {

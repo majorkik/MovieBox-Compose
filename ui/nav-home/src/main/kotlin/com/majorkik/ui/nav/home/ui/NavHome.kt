@@ -37,7 +37,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.CoreDrawable
@@ -45,6 +44,7 @@ import com.majorkik.core.ui.components.InfiniteListHandler
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.extension.showToast
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.Genre
 import com.majorkik.ui.nav.home.component.AppBar
 import com.majorkik.ui.nav.home.component.GenresSwitch
@@ -336,10 +336,10 @@ private fun handleSideEffect(sideEffect: NavHomeViewModelSideEffect, context: Co
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun Preview() {
-    MBTheme(isDark = true) {
+    MBTheme {
         Surface(
             color = MBTheme.colors.background.base, modifier = Modifier.fillMaxWidth()
         ) {

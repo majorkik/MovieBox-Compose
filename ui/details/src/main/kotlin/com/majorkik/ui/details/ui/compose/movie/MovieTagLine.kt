@@ -21,11 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.majorkik.core.ui.CoreDrawable
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.movieDetailsPreview
 
 @Composable
@@ -76,7 +76,7 @@ private fun buildQuoteInlineContent(@DrawableRes drawableRes: Int) = InlineTextC
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun MovieActionsPreview() {
     MBTheme {

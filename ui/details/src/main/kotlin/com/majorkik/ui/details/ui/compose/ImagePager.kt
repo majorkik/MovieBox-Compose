@@ -8,10 +8,10 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.image.Backdrop
 import com.majorkik.tmdb.api.model.image.original
 import com.majorkik.tmdb.api.model.movieDetailsPreview
@@ -35,7 +35,7 @@ internal fun ImagePager(backdrops: ImmutableList<Backdrop>) {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun ImagePagerPreview() {
     MBTheme {

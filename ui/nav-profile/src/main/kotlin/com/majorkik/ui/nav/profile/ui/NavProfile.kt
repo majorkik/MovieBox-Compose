@@ -16,10 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.ui.CoreDrawable
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.ramcosta.composedestinations.annotation.Destination
 import org.koin.androidx.compose.getViewModel
 
@@ -83,10 +83,10 @@ internal fun ThemeButton(enableDarkTheme: (Boolean) -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 internal fun HomeContentPreview() {
-    MBTheme(isDark = true) {
+    MBTheme {
         NavProfileContent(enableDarkTheme = {}, openAuthorization = {})
     }
 }

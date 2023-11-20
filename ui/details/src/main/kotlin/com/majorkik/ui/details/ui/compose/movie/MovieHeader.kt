@@ -16,12 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import arrow.core.getOrElse
 import com.majorkik.common.AppDateFormat
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.movieDetailsPreview
 import com.soywiz.klock.Date
@@ -95,7 +95,7 @@ private fun ReleaseDate(releaseDate: Date?, releaseStatus: String?, modifier: Mo
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun MovieActionsPreview() {
     MBTheme {

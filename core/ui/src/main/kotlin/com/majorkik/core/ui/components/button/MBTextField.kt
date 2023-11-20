@@ -1,14 +1,10 @@
 package com.majorkik.core.ui.components.button
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,9 +26,11 @@ import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 
 @Composable
 fun MBPasswordTextField(
@@ -117,7 +115,7 @@ private fun DecorationBox(
     hint: String,
     innerTextField: @Composable () -> Unit,
     shape: Shape,
-    interactionSource: MutableInteractionSource
+    interactionSource: MutableInteractionSource,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
 
@@ -149,41 +147,29 @@ private fun DecorationBox(
     }
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES, name = "MBTextField DARK")
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO, name = "MBTextField LIGHT")
+@ThemePreview
 @Composable
-private fun MBTextFieldPreview() {
-    MBTheme() {
-        Column(
-            modifier = Modifier
-                .background(MBTheme.colors.background.base)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(text = "With text", color = MBTheme.colors.text.primary)
+private fun MBTextFieldPreview(
+    @PreviewParameter(MBTextFieldProvider::class) text: Pair<String, VisualTransformation>,
+) {
+    MBTheme {
+        Box(modifier = Modifier.padding(8.dp)) {
             MBTextField(
-                value = "examplelogin",
+                value = text.first,
                 hint = "Hint",
                 onValueChange = { },
                 modifier = Modifier.fillMaxWidth(),
-            )
-
-            Text(text = "Empty text", color = MBTheme.colors.text.primary)
-            MBTextField(
-                value = "",
-                hint = "Hint",
-                onValueChange = { },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Text(text = "With password", color = MBTheme.colors.text.primary)
-            MBTextField(
-                value = "password",
-                hint = "Hint",
-                onValueChange = { },
-                modifier = Modifier.fillMaxWidth(),
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = text.second
             )
         }
     }
+}
+
+private class MBTextFieldProvider : PreviewParameterProvider<Pair<String, VisualTransformation>> {
+    override val values = sequenceOf(
+        "simplelogin" to VisualTransformation.None,
+        "" to VisualTransformation.None,
+        "password" to PasswordVisualTransformation()
+    )
+
 }

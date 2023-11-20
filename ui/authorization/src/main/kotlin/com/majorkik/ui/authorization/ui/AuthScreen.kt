@@ -1,6 +1,5 @@
 package com.majorkik.ui.authorization.ui
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,13 +41,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.CoreDrawable
 import com.majorkik.core.ui.components.button.MBPasswordTextField
 import com.majorkik.core.ui.components.button.MBTextField
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.ramcosta.composedestinations.annotation.Destination
 import org.koin.androidx.compose.getViewModel
 
@@ -307,11 +306,10 @@ private fun SignUpDescription(modifier: Modifier = Modifier, onClick: () -> Unit
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES, name = "AuthScreen DARK")
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO, name = "AuthScreen LIGHT")
+@ThemePreview
 @Composable
 private fun AuthContentPreview() {
-    MBTheme() {
+    MBTheme {
         AuthContent(
             state = AuthViewState(),
             onBackPress = {},

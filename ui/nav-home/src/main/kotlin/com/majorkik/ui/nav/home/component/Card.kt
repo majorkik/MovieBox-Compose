@@ -21,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -29,6 +28,7 @@ import com.majorkik.common.percentOf
 import com.majorkik.core.ui.components.getPopcornPlaceholderResId
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.image.Backdrop
 import com.majorkik.tmdb.api.model.image.Poster
 import com.soywiz.klock.Date
@@ -40,7 +40,7 @@ internal fun HorizontalMovieCard(
     title: String,
     voteAverage: Double,
     releaseDate: Date?,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -165,50 +165,28 @@ internal fun VerticalMovieCard(
     }
 }
 
-@Preview
+@ThemePreview
 @Composable
-fun CardLightPreview() {
-    MBTheme(isDark = false) {
-        Box(modifier = Modifier.background(MBTheme.colors.background.base)) {
-            Column {
-                HorizontalMovieCard(
-                    backdrop = null,
-                    title = "Dune",
-                    voteAverage = 9.23,
-                    releaseDate = DateTime.now().date
-                ) {}
-
-                VerticalMovieCard(
-                    poster = null,
-                    title = "Dune",
-                    voteAverage = 9.23,
-                    releaseDate = DateTime.now().date
-                ) {}
-            }
-        }
+fun HorizontalMovieCardPreview() {
+    MBTheme {
+        HorizontalMovieCard(
+            backdrop = null,
+            title = "Dune",
+            voteAverage = 9.23,
+            releaseDate = DateTime.now().date
+        ) {}
     }
 }
 
-@Preview
+@ThemePreview
 @Composable
-fun CardDarkPreview() {
-    MBTheme(isDark = true) {
-        Box(modifier = Modifier.background(MBTheme.colors.background.base)) {
-            Column {
-                HorizontalMovieCard(
-                    backdrop = null,
-                    title = "Dune",
-                    voteAverage = 9.23,
-                    releaseDate = DateTime.now().date
-                ) {}
-
-                VerticalMovieCard(
-                    poster = null,
-                    title = "Dune",
-                    voteAverage = 9.23,
-                    releaseDate = DateTime.now().date
-                ) {}
-            }
-        }
+fun VerticalMovieCardPreview() {
+    MBTheme {
+        VerticalMovieCard(
+            poster = null,
+            title = "Dune",
+            voteAverage = 9.23,
+            releaseDate = DateTime.now().date
+        ) {}
     }
 }

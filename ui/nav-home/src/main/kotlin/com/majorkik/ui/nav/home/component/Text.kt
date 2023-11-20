@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.common.percentOf
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 
 @Composable
 internal fun TitleText(@StringRes text: Int) {
@@ -43,7 +43,7 @@ internal fun PercentVoteAverageText(voteAverage: Double, modifier: Modifier = Mo
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 fun TextPreview() {
     MBTheme {

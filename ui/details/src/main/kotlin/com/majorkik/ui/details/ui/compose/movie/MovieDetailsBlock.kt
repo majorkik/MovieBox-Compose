@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 
 @Composable
 internal fun MovieDetailsBlock(title: String, description: String, modifier: Modifier = Modifier) {
@@ -24,7 +24,7 @@ internal fun MovieDetailsBlock(title: String, description: String, modifier: Mod
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun MovieActionsPreview() {
     MBTheme {

@@ -1,7 +1,6 @@
 package com.majorkik.ui.nav.home.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -16,12 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.R
 import com.majorkik.core.ui.CoreDrawable
 import com.majorkik.core.ui.extension.clickableWithSimpleRipple
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 
 @Composable
 internal fun RoundedButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
@@ -63,18 +62,23 @@ internal fun LoginButton(onClick: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
-fun ButtonPreview() {
+fun RoundedButtonPreview() {
     MBTheme {
-        Column {
-            RoundedButton(text = "Button") {
-                /* no-op */
-            }
-
-            LoginButton {
-                /* no-op */
-            }
+        RoundedButton(text = "Button") {
+            /* no-op */
         }
     }
 }
+
+@ThemePreview
+@Composable
+fun LoginButtonPreview() {
+    MBTheme {
+        LoginButton {
+            /* no-op */
+        }
+    }
+}
+

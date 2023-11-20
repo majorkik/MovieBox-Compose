@@ -2,53 +2,54 @@ package com.majorkik.ui.details.ui.tv
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.majorkik.core.ui.viewmodel.CoreViewModel
 import com.majorkik.tmdb.api.model.TVDetails
 import com.majorkik.tmdb.api.usecase.GetTVDetailsUseCase
 import com.majorkik.ui.details.ui.destinations.TVDetailsScreenDestination
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
-import org.orbitmvi.orbit.Container
-import org.orbitmvi.orbit.ContainerHost
-import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.reduce
-import org.orbitmvi.orbit.viewmodel.container
 
-@Suppress("unused")
 internal class TVDetailsViewModel(
     handle: SavedStateHandle,
     private val getTVDetailsUseCase: GetTVDetailsUseCase,
-) : ViewModel(), ContainerHost<TVDetailsViewState, TVDetailsSideEffect> {
-    // Arguments
+) : CoreViewModel<TVDetailsState, TVDetailsEvent, TVDetailsEffect>(TVDetailsState.Loading) {
+
     private val args = TVDetailsScreenDestination.argsFrom(handle)
 
-    // Initialization container
-    override val container: Container<TVDetailsViewState, TVDetailsSideEffect> =
-        container(TVDetailsViewState()) { state ->
-            if (state.screen !is State.TVDetailsState) {
-                fetchTVDetails()
+    init {
+        processTVDetails()
+    }
+
+    private fun processTVDetails() {
+        viewModelScope.launch(
+            context = CoroutineExceptionHandler { _, _ -> updateState(TVDetailsState.Error) },
+            block = {
+                updateState(TVDetailsState.Loading)
+
+                val details = getTVDetailsUseCase(args.tvId)
+
+                updateState(TVDetailsState.Content(details = details))
             }
-        }
+        )
+    }
 
-    private fun fetchTVDetails() = viewModelScope.launch {
-        val details = getTVDetailsUseCase(args.tvId)
-
-        intent {
-            reduce { state.copy(screen = State.TVDetailsState(data = details)) }
+    override fun reduce(viewEvent: TVDetailsEvent) {
+        when (viewEvent) {
+            TVDetailsEvent.Refresh -> processTVDetails()
         }
     }
 }
 
 @Immutable
-internal sealed class State {
-    data object LoadingState : State()
-    data object ErrorState : State()
-    data class TVDetailsState(val data: TVDetails) : State()
+internal sealed class TVDetailsState {
+    data object Loading : TVDetailsState()
+    data object Error : TVDetailsState()
+    data class Content(val details: TVDetails) : TVDetailsState()
 }
 
-@Immutable
-internal data class TVDetailsViewState(
-    val screen: State = State.LoadingState,
-)
+internal sealed class TVDetailsEvent {
+    data object Refresh : TVDetailsEvent()
+}
 
-internal sealed class TVDetailsSideEffect
+internal sealed class TVDetailsEffect

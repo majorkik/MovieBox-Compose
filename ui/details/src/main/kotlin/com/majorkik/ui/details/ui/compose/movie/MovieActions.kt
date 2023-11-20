@@ -16,11 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.CoreDrawable
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 
 @Composable
 internal fun MovieActions(
@@ -87,7 +87,7 @@ internal fun MovieActions(
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
 private fun MovieActionsPreview() {
     MBTheme {

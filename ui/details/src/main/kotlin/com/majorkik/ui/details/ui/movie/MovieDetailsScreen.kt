@@ -14,10 +14,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.theme.MBTheme
+import com.majorkik.core.ui.theme.ThemePreview
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.movieDetailsPreview
 import com.majorkik.ui.details.ui.compose.ImagePager
@@ -112,28 +114,20 @@ private fun ErrorStateContent() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreview
 @Composable
-private fun MovieDetailsPreview() {
+private fun MovieDetailsErrorStatePreview(
+    @PreviewParameter(MovieDetailsStateProvider::class) state: State,
+) {
     MBTheme(isDark = false) {
-        MovieDetailsScreen(
-            state = MovieDetailsViewState(
-                screen = State.MovieDetailsState(
-                    data = movieDetailsPreview()
-                )
-            )
-        )
+        MovieDetailsScreen(MovieDetailsViewState(state))
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun MovieDetailsErrorStatePreview() {
-    MBTheme(isDark = false) {
-        MovieDetailsScreen(
-            state = MovieDetailsViewState(
-                screen = State.ErrorState
-            )
-        )
-    }
+private class MovieDetailsStateProvider : PreviewParameterProvider<State> {
+    override val values = sequenceOf(
+        State.MovieDetailsState(movieDetailsPreview()),
+        State.ErrorState,
+    )
+
 }
