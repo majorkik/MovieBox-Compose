@@ -30,6 +30,12 @@ spotless = "6.4.2"
 # Logging
 kotlin_logging = "3.0.5"
 slf4j = "2.0.7"
+kotlinVersion = "1.9.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+material = "1.10.0"
+lifecycleViewmodelCompose = "2.6.2"
 
 [libraries]
 # Gradle
@@ -119,6 +125,11 @@ expandabletext = "io.github.dokar3:expandabletext:0.1.7"
 android_gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android_gradle_plugin" }
 kotlin_gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp_gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 
 [bundles]
 androidx_ui = [
@@ -154,3 +165,5 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint_jlleitsch
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 gradle_versions = { id = "com.github.ben-manes.versions", version.ref = "gradle_versions" }
+androidLibrary = { id = "com.android.library", version.ref = "android_gradle_plugin" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }

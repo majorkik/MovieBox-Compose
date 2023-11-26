@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.feature.tmdb.domain)
     implementation(projects.core.localizaton)
+    implementation(projects.core.commonDi)
 
     // Android
     implementation(libs.mvi.orbit)

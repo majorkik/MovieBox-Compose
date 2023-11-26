@@ -1,4 +1,4 @@
-package com.majorkik.tmdb.data
+package com.majorkik.tmdb.data.di
 
 import com.majorkik.tmdb.api.repository.GenresRepository
 import com.majorkik.tmdb.api.repository.MovieDetailsRepository

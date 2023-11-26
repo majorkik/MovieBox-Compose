@@ -1,9 +1,9 @@
 package com.majorkik.tmdb.data.network
 
 import com.majorkik.tmdb.api.UrlConstants
-import com.majorkik.tmdb.data.Config
 import com.majorkik.tmdb.data.resource.TV
 import com.majorkik.tmdb.data.response.TVDetailsResponse
+import com.majorkik.tmdb.data.util.Config
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine

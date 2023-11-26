@@ -12,4 +12,6 @@ dependencies {
     api(platform(libs.androidx.compose.bom))
     api(libs.bundles.compose)
     api(libs.accompanist.insets)
+
+    api(libs.lifecycle.viewmodel.compose)
 }

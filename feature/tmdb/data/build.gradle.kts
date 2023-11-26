@@ -7,6 +7,7 @@ plugins {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.feature.tmdb.domain)
+    implementation(projects.core.commonDi)
 
     implementation(libs.bundles.logging)
 

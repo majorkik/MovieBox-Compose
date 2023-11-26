@@ -29,7 +29,7 @@ internal class MovieDetailsViewModel(
         }
 
     private fun actionFetchMovieDetails(id: Int) = intent {
-        when (val result = getMovieDetailsByIdUseCase(id)) {
+        when (val result = getMovieDetailsByIdUseCase.invoke(id)) {
             is Either.Left -> updateState(State.ErrorState)
             is Either.Right -> {
                 updateState(State.MovieDetailsState(data = result.value))

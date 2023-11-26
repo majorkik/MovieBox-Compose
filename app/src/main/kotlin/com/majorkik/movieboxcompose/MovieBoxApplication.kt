@@ -2,8 +2,9 @@ package com.majorkik.movieboxcompose
 
 import android.app.Application
 import com.majorkik.app.preferences.impl.appPreferencesImplModule
+import com.majorkik.movieboxcompose.di.AppContainer
 import com.majorkik.tmdb.api.tmdbApiModule
-import com.majorkik.tmdb.data.tmdbImplModule
+import com.majorkik.tmdb.data.di.tmdbImplModule
 import com.majorkik.ui.authorization.authModule
 import com.majorkik.ui.details.movieDetailsModule
 import com.majorkik.ui.nav.home.uiNavHome
@@ -16,6 +17,8 @@ import org.koin.core.logger.Level
 class MovieBoxApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        AppContainer
 
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)

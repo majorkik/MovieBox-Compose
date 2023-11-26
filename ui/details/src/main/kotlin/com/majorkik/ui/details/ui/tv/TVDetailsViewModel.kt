@@ -11,11 +11,9 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
 internal class TVDetailsViewModel(
-    handle: SavedStateHandle,
+    private val tvId: Int,
     private val getTVDetailsUseCase: GetTVDetailsUseCase,
 ) : CoreViewModel<TVDetailsState, TVDetailsEvent, TVDetailsEffect>(TVDetailsState.Loading) {
-
-    private val args = TVDetailsScreenDestination.argsFrom(handle)
 
     init {
         processTVDetails()
@@ -27,7 +25,7 @@ internal class TVDetailsViewModel(
             block = {
                 updateState(TVDetailsState.Loading)
 
-                val details = getTVDetailsUseCase(args.tvId)
+                val details = getTVDetailsUseCase.invoke(tvId)
 
                 updateState(TVDetailsState.Content(details = details))
             }
