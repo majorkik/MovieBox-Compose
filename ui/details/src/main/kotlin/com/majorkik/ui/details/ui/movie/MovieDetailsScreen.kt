@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.dp
 import com.majorkik.core.localization.StringResource
 import com.majorkik.core.ui.theme.MBTheme
 import com.majorkik.core.ui.theme.ThemePreview
+import com.majorkik.core.ui.viewmodel.viewModel
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.model.movieDetailsPreview
+import com.majorkik.ui.details.DetailsFeature.component
 import com.majorkik.ui.details.ui.compose.ImagePager
 import com.majorkik.ui.details.ui.compose.movie.MovieActions
 import com.majorkik.ui.details.ui.compose.movie.MovieCreditsBlock
@@ -32,10 +34,10 @@ import com.majorkik.ui.details.ui.compose.movie.MovieTagline
 import com.ramcosta.composedestinations.annotation.Destination
 import org.koin.androidx.compose.getViewModel
 
-@Destination(navArgsDelegate = MovieDetailsNavArgs::class)
+@Destination
 @Composable
-fun MovieDetailsScreen() {
-    val viewModel: MovieDetailsViewModel = getViewModel()
+fun MovieDetailsScreen(movieId: Int) {
+    val viewModel: MovieDetailsViewModel = viewModel { component().createMovieDetailsViewModel(movieId = movieId) }
     val state by viewModel.container.stateFlow.collectAsState()
 
     MovieDetailsScreen(state)

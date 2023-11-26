@@ -1,5 +1,6 @@
 package com.majorkik.tmdb.data.di
 
+import com.majorkik.tmdb.api.repository.MovieDetailsRepository
 import com.majorkik.tmdb.api.repository.TVsRepository
 import com.majorkik.tmdb.data.TmdbDataApi
 
@@ -7,6 +8,7 @@ internal interface TmdbDataComponent {
 
     val api: TmdbDataApi
     val tvDetailsRepository: TVsRepository
+    val movieDetailsRepository: MovieDetailsRepository
 }
 
 @Suppress("UnusedPrivateMember")

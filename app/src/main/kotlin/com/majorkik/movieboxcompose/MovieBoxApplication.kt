@@ -3,10 +3,8 @@ package com.majorkik.movieboxcompose
 import android.app.Application
 import com.majorkik.app.preferences.impl.appPreferencesImplModule
 import com.majorkik.movieboxcompose.di.AppContainer
-import com.majorkik.tmdb.api.tmdbApiModule
 import com.majorkik.tmdb.data.di.tmdbImplModule
 import com.majorkik.ui.authorization.authModule
-import com.majorkik.ui.details.movieDetailsModule
 import com.majorkik.ui.nav.home.uiNavHome
 import com.majorkik.ui.nav.profile.uiNavProfile
 import org.koin.android.ext.koin.androidContext
@@ -26,9 +24,7 @@ class MovieBoxApplication : Application() {
             modules(
                 appModule,
                 authModule,
-                tmdbApiModule,
                 tmdbImplModule,
-                movieDetailsModule,
                 appPreferencesImplModule,
                 uiNavProfile,
                 uiNavHome

@@ -1,6 +1,7 @@
 package com.majorkik.tmdb.data.di
 
 import com.majorkik.common.di.uiLazy
+import com.majorkik.tmdb.api.repository.MovieDetailsRepository
 import com.majorkik.tmdb.api.repository.TVsRepository
 import com.majorkik.tmdb.data.TmdbDataApi
 import com.majorkik.tmdb.data.TmdbDataApiImp
@@ -8,6 +9,7 @@ import com.majorkik.tmdb.data.network.ApiService
 import com.majorkik.tmdb.data.network.KtorApiService
 import com.majorkik.tmdb.data.network.KtorApiServiceImpl
 import com.majorkik.tmdb.data.network.createApiService
+import com.majorkik.tmdb.data.repository.MovieDetailsRepositoryImpl
 import com.majorkik.tmdb.data.repository.TVsRepositoryImpl
 import io.ktor.client.engine.okhttp.OkHttpConfig
 import io.ktor.client.engine.okhttp.OkHttpEngine
@@ -18,6 +20,7 @@ internal interface TmdbDataModule {
     val apiRetrofitService: ApiService
     val apiKtorService: KtorApiService
     val tvDetailsRepository: TVsRepository
+    val movieDetailsRepository: MovieDetailsRepository
 
     class Impl : TmdbDataModule {
 
@@ -30,6 +33,9 @@ internal interface TmdbDataModule {
         override val tvDetailsRepository: TVsRepository = TVsRepositoryImpl(
             api = apiRetrofitService,
             ktorApi = apiKtorService,
+        )
+        override val movieDetailsRepository: MovieDetailsRepository = MovieDetailsRepositoryImpl(
+            api = apiRetrofitService,
         )
     }
 }

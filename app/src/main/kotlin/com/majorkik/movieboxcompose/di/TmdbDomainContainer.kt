@@ -19,5 +19,9 @@ class TmdbDomainContainer {
         override fun getTVRepository(): TVsRepository {
             return tmdbDataContainer.getApi().getTVsRepository()
         }
+
+        override fun getMovieDetailsRepository(): MovieDetailsRepository {
+            return tmdbDataContainer.getApi().getMovieDetailsRepository()
+        }
     }
 }

@@ -1,12 +1,10 @@
 package com.majorkik.ui.details.ui.movie
 
 import androidx.compose.runtime.Immutable
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import arrow.core.Either
 import com.majorkik.tmdb.api.model.MovieDetails
-import com.majorkik.tmdb.api.usecase.GetMovieDetailsByIdUseCase
-import com.majorkik.ui.details.ui.destinations.MovieDetailsScreenDestination
+import com.majorkik.tmdb.api.usecase.GetMovieDetailsUseCase
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -14,22 +12,20 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 
 internal class MovieDetailsViewModel(
-    handle: SavedStateHandle,
-    private val getMovieDetailsByIdUseCase: GetMovieDetailsByIdUseCase,
+    private val movieId: Int,
+    private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
 ) : ViewModel(), ContainerHost<MovieDetailsViewState, MovieDetailsSideEffect> {
-    // Arguments
-    private val args = MovieDetailsScreenDestination.argsFrom(handle)
 
     // Initialization container
     override val container: Container<MovieDetailsViewState, MovieDetailsSideEffect> =
         container(MovieDetailsViewState()) { state ->
             if (state.screen !is State.MovieDetailsState) {
-                actionFetchMovieDetails(id = args.movieId)
+                actionFetchMovieDetails(id = movieId)
             }
         }
 
     private fun actionFetchMovieDetails(id: Int) = intent {
-        when (val result = getMovieDetailsByIdUseCase.invoke(id)) {
+        when (val result = getMovieDetailsUseCase.invoke(id)) {
             is Either.Left -> updateState(State.ErrorState)
             is Either.Right -> {
                 updateState(State.MovieDetailsState(data = result.value))
