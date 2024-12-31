@@ -12,7 +12,7 @@ import com.ramcosta.composedestinations.spec.NavGraphSpec
 
 object NavGraphs {
     val home = object : NavGraphSpec {
-        override val route = "search"
+        override val route = "home"
         override val startRoute = NavHomeScreenDestination routedIn this
         override val destinationsByRoute = listOf<DestinationSpec<*>>(
             NavHomeScreenDestination,
@@ -23,7 +23,7 @@ object NavGraphs {
     }
 
     val search = object : NavGraphSpec {
-        override val route = "watched"
+        override val route = "search"
         override val startRoute = NavSearchScreenDestination routedIn this
         override val destinationsByRoute = listOf<DestinationSpec<*>>(
             NavSearchScreenDestination

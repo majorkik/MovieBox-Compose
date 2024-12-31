@@ -2,6 +2,7 @@ package com.majorkik.ui.details.ui.movie
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import arrow.core.Either
 import com.majorkik.tmdb.api.model.MovieDetails
 import com.majorkik.tmdb.api.usecase.GetMovieDetailsUseCase
@@ -25,6 +26,7 @@ internal class MovieDetailsViewModel(
         }
 
     private fun actionFetchMovieDetails(id: Int) = intent {
+        viewModelScope
         when (val result = getMovieDetailsUseCase.invoke(id)) {
             is Either.Left -> updateState(State.ErrorState)
             is Either.Right -> {

@@ -27,6 +27,4 @@ abstract class CoreViewModel<State, Event, Effect>(initialState: State) : ViewMo
     suspend fun sendEffect(effect: Effect) {
         _sideEffect.send(effect)
     }
-
-
 }
